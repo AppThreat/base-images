@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - main
-      - al9
-      - sle
       - release/*
     tags:
       - 'v*'
