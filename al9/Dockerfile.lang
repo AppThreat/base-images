@@ -1,0 +1,42 @@
+ARG SYSBASE=almalinux:9
+FROM ${SYSBASE} as system-build
+
+RUN mkdir -p /mnt/sys-root; \
+    dnf install --installroot /mnt/sys-root glibc-minimal-langpack microdnf java-21-openjdk-headless findutils which tar gzip zip unzip sudo \
+    python3.11 python3.11-devel python3.11-pip \
+    --releasever 9 --setopt install_weak_deps=false --nodocs -y; \
+    dnf --installroot /mnt/sys-root clean all;
+RUN rm -rf /mnt/sys-root/var/cache/dnf /mnt/sys-root/var/log/dnf* /mnt/sys-root/var/lib/dnf /mnt/sys-root/var/log/yum.*; \
+    /bin/date +%Y%m%d_%H%M > /mnt/sys-root/etc/BUILDTIME ;  \
+    echo '%_install_langs C.utf8' > /mnt/sys-root/etc/rpm/macros.image-language-conf; \
+    echo 'LANG="C.utf8"' >  /mnt/sys-root/etc/locale.conf; \
+    echo 'container' > /mnt/sys-root/etc/dnf/vars/infra; \
+    rm -f /mnt/sys-root/etc/machine-id; \
+    touch /mnt/sys-root/etc/machine-id; \
+    touch /mnt/sys-root/etc/resolv.conf; \
+    touch /mnt/sys-root/etc/hostname; \
+    touch /mnt/sys-root/etc/.pwd.lock; \
+    chmod 600 /mnt/sys-root/etc/.pwd.lock; \
+    rm -rf /mnt/sys-root/usr/share/locale/en* /mnt/sys-root/boot /mnt/sys-root/dev/null /mnt/sys-root/var/log/hawkey.log ; \
+    echo '0.0 0 0.0' > /mnt/sys-root/etc/adjtime; \
+    echo '0' >> /mnt/sys-root/etc/adjtime; \
+    echo 'UTC' >> /mnt/sys-root/etc/adjtime; \
+    mkdir -p /mnt/sys-root/run/lock; \
+    cd /mnt/sys-root/etc ; \
+    ln -s ../usr/share/zoneinfo/UTC localtime
+
+FROM scratch
+
+LABEL maintainer="AppThreat" \
+      org.opencontainers.image.authors="Team AppThreat <cloud@appthreat.com>" \
+      org.opencontainers.image.source="https://github.com/AppThreat/base-images" \
+      org.opencontainers.image.url="https://github.com/AppThreat/base-images" \
+      org.opencontainers.image.version="al9" \
+      org.opencontainers.image.vendor="appthreat" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.title="Base image" \
+      org.opencontainers.image.description="Base image based on almalinux:9-minimal"
+
+COPY --link --from=system-build /mnt/sys-root/ /
+
+CMD /bin/bash
