@@ -130,7 +130,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  sle-docker-image:
+  sle-dotnet-image:
     runs-on: ubuntu-latest
     permissions:
       contents: write
