@@ -169,6 +169,7 @@ jobs:
 
   cdxgen-dotnet-image:
     runs-on: ubuntu-latest
+    needs: sle-dotnet-image
     permissions:
       packages: write
     steps:
