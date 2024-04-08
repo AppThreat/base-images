@@ -201,5 +201,5 @@ jobs:
           file: cdxgen/Dockerfile.dotnet
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ghcr.io/appthreat/cdxgen-dotnet:latest,ghcr.io/appthreat/cdxgen-dotnet:v10
           labels: ${{ steps.meta.outputs.labels }}
