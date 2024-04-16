@@ -10,7 +10,8 @@ ENV SBT_VERSION=$SBT_VERSION \
     GRADLE_OPTS="-Dorg.gradle.daemon=false" \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
     GRADLE_HOME="/opt/gradle/${GRADLE_VERSION}" \
-    SBT_HOME="/opt/sbt/${SBT_VERSION}"
+    SBT_HOME="/opt/sbt/${SBT_VERSION}" \
+    PATH=${PATH}:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${GRADLE_HOME}/bin:${SBT_HOME}/bin:
 
 RUN set -e; \
     ARCH_NAME="$(rpm --eval '%{_arch}')"; \
