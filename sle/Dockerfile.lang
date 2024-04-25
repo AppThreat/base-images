@@ -1,12 +1,13 @@
 FROM registry.suse.com/bci/python:3.11 as builder
 
-ARG JAVA_VERSION=21.0.2-tem
+ARG JAVA_VERSION=22.0.1-tem
 ARG MAVEN_VERSION=3.9.6
 
 ENV JAVA_VERSION=$JAVA_VERSION \
     MAVEN_VERSION=$MAVEN_VERSION \
     JAVA_HOME="/opt/java/${JAVA_VERSION}" \
-    MAVEN_HOME="/opt/maven/${MAVEN_VERSION}"
+    MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
+    NVM_DIR="/root/.nvm"
 ENV PATH=${PATH}:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
 RUN set -e; \
     ARCH_NAME="$(rpm --eval '%{_arch}')"; \
@@ -22,7 +23,7 @@ RUN set -e; \
             ;; \
         *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
     esac; \
-    zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc gcc-c++ git-core nodejs20 npm20 wget zip unzip make awk \
+    zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc gcc-c++ git-core wget zip unzip make awk \
     && curl -s "https://get.sdkman.io" | bash \
     && source "$HOME/.sdkman/bin/sdkman-init.sh" \
     && echo -e "sdkman_auto_answer=true\nsdkman_selfupdate_feature=false\nsdkman_auto_env=true\nsdkman_curl_connect_timeout=20\nsdkman_curl_max_time=0" >> $HOME/.sdkman/etc/config \
@@ -31,6 +32,11 @@ RUN set -e; \
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
+    && source /root/.nvm/nvm.sh \
+    && nvm install 22 \
+    && node -v \
+    && npm -v \
     && zypper clean -a
 
 CMD /bin/bash
