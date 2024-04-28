@@ -11,6 +11,9 @@ ENV SBT_VERSION=$SBT_VERSION \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
     GRADLE_HOME="/opt/gradle/${GRADLE_VERSION}" \
     SBT_HOME="/opt/sbt/${SBT_VERSION}" \
+    LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
     PATH=${PATH}:${MAVEN_HOME}/bin:${GRADLE_HOME}/bin:${SBT_HOME}/bin:
 
 RUN set -e; \
