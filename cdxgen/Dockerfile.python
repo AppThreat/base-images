@@ -21,7 +21,7 @@ ENV NVM_DIR="/root/.nvm" \
     PATH=${PATH}:/root/.nvm/versions/node/v22.0.0/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
 
 RUN source /root/.nvm/nvm.sh \
-    && zypper --non-interactive install -l --no-recommends gcc-fortran clang7 llvm7 llvm7-devel libcurl-devel libjpeg62-devel libmariadb-devel \
+    && zypper --non-interactive install -l --no-recommends libcurl-devel libjpeg62-devel libmariadb-devel \
         postgresql-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel \
     && python3 -m pip install --upgrade pip virtualenv \
     && python3 -m pip install --user pipenv poetry blint \
