@@ -18,7 +18,7 @@ ENV NVM_DIR="/root/.nvm" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
-    PATH=${PATH}:/root/.nvm/versions/node/v22.0.0/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
+    PATH=${PATH}:/root/.nvm/versions/node/v22.1.0/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
 
 RUN source /root/.nvm/nvm.sh \
     && zypper --non-interactive install -l --no-recommends clang7 llvm7 llvm7-devel libcurl-devel libjpeg62-devel libmariadb-devel \
