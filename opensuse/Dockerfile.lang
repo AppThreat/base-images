@@ -1,4 +1,4 @@
-FROM registry.suse.com/bci/python:3.12 as builder
+FROM opensuse/tumbleweed:latest as builder
 
 ARG JAVA_VERSION=22.0.1-tem
 ARG MAVEN_VERSION=3.9.6
@@ -26,11 +26,12 @@ RUN set -e; \
             ;; \
         *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
     esac; \
-    zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc13 gcc13-c++ gcc13-fortran \
+    zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
+        python312 python312-devel python312-pip \
         git-core wget zip unzip make gawk \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 10 \
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 10 \
-    && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-13 10 \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
+    && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-14 10 \
     && curl -s "https://get.sdkman.io" | bash \
     && source "$HOME/.sdkman/bin/sdkman-init.sh" \
     && echo -e "sdkman_auto_answer=true\nsdkman_selfupdate_feature=false\nsdkman_auto_env=true\nsdkman_curl_connect_timeout=20\nsdkman_curl_max_time=0" >> $HOME/.sdkman/etc/config \
