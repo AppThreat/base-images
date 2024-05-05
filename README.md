@@ -1,6 +1,6 @@
 # Introduction
 
-This repo contains the base images for AppThreat projects such as cdxgen. They were created based on specific issues and challenges observed in enterprise deployments so may or may not work for everyone.
+This repo contains the base images for AppThreat projects such as cdxgen. They were created based on specific issues and challenges observed in enterprise deployments. There will be no FREE community support offered for these images.
 
 ## Unofficial cdxgen variants
 
@@ -45,3 +45,5 @@ docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-pytho
 ## License
 
 MIT
+
+NOTE: No FREE support will be offered for users of these images.
