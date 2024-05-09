@@ -11,6 +11,7 @@ ENV SBT_VERSION=$SBT_VERSION \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
     GRADLE_HOME="/opt/gradle/${GRADLE_VERSION}" \
     SBT_HOME="/opt/sbt/${SBT_VERSION}" \
+    ANDROID_SDK_ROOT=/opt/android-sdk-linux \
     ANDROID_HOME=/opt/android-sdk-linux \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
