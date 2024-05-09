@@ -42,7 +42,7 @@ RUN set -e; \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
     && mkdir -p ${ANDROID_HOME}/cmdline-tools \
-    && curl -L https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o ${ANDROID_HOME}/cmdline-tools/android_tools.zip \
+    && curl -L https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -o ${ANDROID_HOME}/cmdline-tools/android_tools.zip \
     && unzip ${ANDROID_HOME}/cmdline-tools/android_tools.zip -d ${ANDROID_HOME}/cmdline-tools/ \
     && rm ${ANDROID_HOME}/cmdline-tools/android_tools.zip \
     && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest \
