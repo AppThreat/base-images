@@ -239,7 +239,7 @@ jobs:
           file: sle/Dockerfile.java
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta-bci-java.outputs.tags }}
           labels: ${{ steps.meta-bci-java.outputs.labels }}
 
   cdxgen-java-image:
