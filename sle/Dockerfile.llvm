@@ -1,0 +1,57 @@
+FROM registry.suse.com/bci/rust:1.77 as builder
+
+ARG GCC_VERSION=13
+ARG NODE_VERSION=22.1.0
+ARG LLVM_VERSION=17.0.6
+
+ENV LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    NVM_DIR="/root/.nvm" \
+    LLVM_HOME=/opt/llvm/llvm-project-${LLVM_VERSION}.src/release-build/bin \
+    CMAKE_CXX_COMPILER=/usr/bin/g++
+ENV PATH=$PATH:${LLVM_HOME}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:
+
+RUN set -e; \
+    ARCH_NAME="$(rpm --eval '%{_arch}')"; \
+    url=; \
+    case "${ARCH_NAME##*-}" in \
+        'x86_64') \
+            OS_ARCH_SUFFIX=''; \
+            GOBIN_VERSION='amd64'; \
+            ;; \
+        'aarch64') \
+            OS_ARCH_SUFFIX='-aarch64'; \
+            GOBIN_VERSION='arm64'; \
+            ;; \
+        *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
+    esac; \
+    zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc${GCC_VERSION} gcc${GCC_VERSION}-c++ gcc${GCC_VERSION}-fortran \
+        ninja git-core wget zip unzip make gawk cmake bison xz python311 python311-pip python311-devel valgrind-devel \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} 10 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} 10 \
+    && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_VERSION} 10 \
+    && mkdir /opt/llvm && cd /opt/llvm \
+    && curl -LO https://github.com/llvm/llvm-project/releases/download/llvmorg-${LLVM_VERSION}/llvm-project-${LLVM_VERSION}.src.tar.xz \
+    && tar Jxf llvm-project-${LLVM_VERSION}.src.tar.xz \
+    && cd /opt/llvm/llvm-project-${LLVM_VERSION}.src \
+    && cmake -S llvm -B ./release-build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+        -DLLVM_ENABLE_DUMP=ON -DLLVM_ENABLE_FFI=ON \
+        -DBOOTSTRAP_LLVM_ENABLE_LLD=ON \
+        -DBOOTSTRAP_BOOTSTRAP_LLVM_ENABLE_LLD=ON \
+        -DPGO_INSTRUMENT_LTO=Thin \
+        -DLLVM_ENABLE_PROJECTS="clang;compiler-rt;lld;clang-tools-extra" \
+        -DLLVM_DISTRIBUTION_COMPONENTS="lld;compiler-rt;clang-format" \
+        -DCLANG_DEFAULT_LINKER="lld" \
+    && ninja -C ./release-build \
+    && rm /opt/llvm/llvm-project-${LLVM_VERSION}.src.tar.xz \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
+    && source /root/.nvm/nvm.sh \
+    && nvm install ${NODE_VERSION} \
+    && node -v \
+    && npm -v \
+    && gcc --version \
+    && rustc --version \
+    && zypper clean -a
+
+CMD /bin/bash
