@@ -34,12 +34,20 @@ docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotne
 
 ### Python applications
 
-Use the unofficial image `ghcr.io/appthreat/cdxgen-python:v10`. This includes additional build tools and libraries to build a range of Python applications.
+Use the unofficial image `ghcr.io/appthreat/cdxgen-python312:v10` or `ghcr.io/appthreat/cdxgen-python311:v10`. This includes additional build tools and libraries to build a range of Python applications.
 
 Example invocation:
 
+Python 3.12
+
 ```shell
-docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python:v10 -r /app -o /app/bom.json -t python
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python312:v10 -r /app -o /app/bom.json -t python
+```
+
+Python 3.11
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python311:v10 -r /app -o /app/bom.json -t python
 ```
 
 ## License
