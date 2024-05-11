@@ -40,7 +40,7 @@ RUN set -e; \
         -DLLVM_ENABLE_PROJECTS="clang;compiler-rt;lld;clang-tools-extra" \
         -DLLVM_DISTRIBUTION_COMPONENTS="lld;compiler-rt;clang-format" \
         -DCLANG_DEFAULT_LINKER="lld" \
-    && ninja -C ./release-build \
+    && ninja -C ./release-build -j 8 \
     && rm /opt/llvm/llvm-project-${LLVM_VERSION}.src.tar.xz \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
     && source /root/.nvm/nvm.sh \

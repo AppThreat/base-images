@@ -276,7 +276,7 @@ jobs:
           file: cdxgen/Dockerfile.java
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-java:latest,ghcr.io/appthreat/cdxgen-java:v10
+          tags: ghcr.io/appthreat/cdxgen-java:latest,ghcr.io/appthreat/cdxgen-java:v10,ghcr.io/appthreat/cdxgen-java11:latest,ghcr.io/appthreat/cdxgen-java11:v10
           labels: ${{ steps.meta-cdxgen-java.outputs.labels }}
 
   sle-java17-image:
@@ -388,7 +388,7 @@ jobs:
           file: cdxgen/Dockerfile.python
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-python:latest,ghcr.io/appthreat/cdxgen-python:v10
+          tags: ghcr.io/appthreat/cdxgen-python:latest,ghcr.io/appthreat/cdxgen-python:v10,ghcr.io/appthreat/cdxgen-python312:latest,ghcr.io/appthreat/cdxgen-python312:v10
           labels: ${{ steps.meta-cdxgen-python.outputs.labels }}
 
   sle-python311-image:
