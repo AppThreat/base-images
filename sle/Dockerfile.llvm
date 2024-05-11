@@ -37,9 +37,6 @@ RUN set -e; \
     && cd /opt/llvm/llvm-project-${LLVM_VERSION}.src \
     && cmake -S llvm -B ./release-build -G Ninja -DCMAKE_BUILD_TYPE=Release \
         -DLLVM_ENABLE_DUMP=ON -DLLVM_ENABLE_FFI=ON \
-        -DBOOTSTRAP_LLVM_ENABLE_LLD=ON \
-        -DBOOTSTRAP_BOOTSTRAP_LLVM_ENABLE_LLD=ON \
-        -DPGO_INSTRUMENT_LTO=Thin \
         -DLLVM_ENABLE_PROJECTS="clang;compiler-rt;lld;clang-tools-extra" \
         -DLLVM_DISTRIBUTION_COMPONENTS="lld;compiler-rt;clang-format" \
         -DCLANG_DEFAULT_LINKER="lld" \
