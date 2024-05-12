@@ -13,7 +13,7 @@ Example invocations:
 Java 11 version
 
 ```shell
-docker run --rm -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java:v10 -r /app -o /app/bom.json -t java
+docker run --rm -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11:v10 -r /app -o /app/bom.json -t java
 ```
 
 Java 17 version
