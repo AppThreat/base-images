@@ -11,6 +11,8 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.image.description="Rolling image with cdxgen SBOM generator for Python 3.12 apps" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python:v10 -r /app --server"
 
+ARG NODE_VERSION=22.2.0
+
 ENV NVM_DIR="/root/.nvm" \
     PYTHON_CMD=python3 \
     PYTHONUNBUFFERED=1 \
@@ -18,7 +20,7 @@ ENV NVM_DIR="/root/.nvm" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
-    PATH=${PATH}:/root/.nvm/versions/node/v22.1.0/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
+    PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
 
 RUN source /root/.nvm/nvm.sh \
     && zypper --non-interactive install -l --no-recommends clang7 llvm7 llvm7-devel libcurl-devel libjpeg62-devel libmariadb-devel \

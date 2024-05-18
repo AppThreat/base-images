@@ -2,6 +2,7 @@ FROM opensuse/tumbleweed:latest as builder
 
 ARG JAVA_VERSION=22.0.1-tem
 ARG MAVEN_VERSION=3.9.6
+ARG NODE_VERSION=22.2.0
 
 ENV JAVA_VERSION=$JAVA_VERSION \
     MAVEN_VERSION=$MAVEN_VERSION \
@@ -11,7 +12,7 @@ ENV JAVA_VERSION=$JAVA_VERSION \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
     NVM_DIR="/root/.nvm"
-ENV PATH=${PATH}:/root/.nvm/versions/node/v22.1.0/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
+ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
 RUN set -e; \
     ARCH_NAME="$(rpm --eval '%{_arch}')"; \
     url=; \
@@ -27,7 +28,7 @@ RUN set -e; \
         *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
     esac; \
     zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
-        python312 python312-devel python312-pip \
+        python312 python312-devel python312-pip findutils \
         git-core wget zip unzip make gawk \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
@@ -42,7 +43,7 @@ RUN set -e; \
     && rm -rf /root/.sdkman \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
     && source /root/.nvm/nvm.sh \
-    && nvm install 22.1.0 \
+    && nvm install ${NODE_VERSION} \
     && node -v \
     && npm -v \
     && gcc --version \
