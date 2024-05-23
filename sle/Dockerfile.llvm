@@ -12,21 +12,7 @@ ENV LC_ALL=en_US.UTF-8 \
     CMAKE_CXX_COMPILER=/usr/bin/g++
 ENV PATH=$PATH:${LLVM_HOME}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:
 
-RUN set -e; \
-    ARCH_NAME="$(rpm --eval '%{_arch}')"; \
-    url=; \
-    case "${ARCH_NAME##*-}" in \
-        'x86_64') \
-            OS_ARCH_SUFFIX=''; \
-            GOBIN_VERSION='amd64'; \
-            ;; \
-        'aarch64') \
-            OS_ARCH_SUFFIX='-aarch64'; \
-            GOBIN_VERSION='arm64'; \
-            ;; \
-        *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
-    esac; \
-    zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc${GCC_VERSION} gcc${GCC_VERSION}-c++ gcc${GCC_VERSION}-fortran \
+RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc${GCC_VERSION} gcc${GCC_VERSION}-c++ gcc${GCC_VERSION}-fortran \
         ninja git-core wget zip unzip make gawk cmake bison xz python311 python311-pip python311-devel valgrind-devel \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} 10 \
