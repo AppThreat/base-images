@@ -28,8 +28,16 @@ Use the unofficial image `ghcr.io/appthreat/cdxgen-dotnet:v10`.
 
 Example invocation:
 
+Dotnet 3.1 or Dotnet 6.0
+
 ```shell
-docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet:v10 -r /app -o /app/bom.json -t dotnet
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet6:v10 -r /app -o /app/bom.json -t dotnet
+```
+
+Dotnet 7.0
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet7:v10 -r /app -o /app/bom.json -t dotnet
 ```
 
 ### Python applications
