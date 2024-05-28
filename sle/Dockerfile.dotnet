@@ -8,13 +8,11 @@ RUN zypper --non-interactive refresh && zypper --non-interactive update && zyppe
     && zypper --non-interactive install -l --no-recommends dotnet-sdk-3.1 \
     && zypper --non-interactive addrepo -G -f -K https://download.opensuse.org/repositories/Mono/SLE_15_SP1/Mono.repo \
     && zypper --non-interactive addrepo -G -f -K  https://download.opensuse.org/repositories/graphics/openSUSE_Factory/graphics.repo \
-    && zypper --non-interactive install --allow-unsigned-rpm -l --no-recommends mono-complete mono-nuget mono-nuget-devel libexif12 libexif-devel \
-    && echo -e '#!/bin/sh\nexec /usr/bin/mono /usr/lib/mono/nuget/NuGet.exe "$@"\n' > /usr/bin/nuget \
-    && curl -L "https://github.com/mono/nuget-binary/raw/2.12/NuGet.exe" -o /usr/lib/mono/nuget/NuGet.exe \
-    && curl -L "https://github.com/mono/nuget-binary/raw/2.12/NuGet.Core.dll" -o /usr/lib/mono/nuget/NuGet.Core.dll \
-    && curl -L "https://github.com/mono/nuget-binary/raw/2.12/Microsoft.Web.XmlTransform.dll" -o /usr/lib/mono/nuget/Microsoft.Web.XmlTransform.dll \
+    && zypper --non-interactive install --allow-unsigned-rpm -l --no-recommends mono-complete libexif12 libexif-devel \
+    && echo -e '#!/bin/sh\nexec /usr/bin/mono /usr/lib/mono/nuget/nuget.exe "$@"\n' > /usr/bin/nuget \
     && chmod +x /usr/bin/nuget \
+    && rm -rf /usr/lib/mono/nuget \
     && dotnet --list-sdks \
     && zypper clean -a
-
+COPY nuget /usr/lib/mono/nuget
 CMD /bin/bash
