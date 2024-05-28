@@ -8,7 +8,7 @@ ENV MAVEN_VERSION=$MAVEN_VERSION \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
-ENV PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:
+ENV PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
 RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
         python312 python312-devel python312-pip findutils java-22-openjdk-devel \
         git-core wget zip unzip make gawk nodejs22 npm22 rust1.78 cargo1.78 \
@@ -23,7 +23,8 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
-    && python -m pip install poetry pipenv \
+    && mkdir /opt/pypi \
+    && python -m pip install poetry pipenv blint --target /opt/pypi \
     && node -v \
     && npm -v \
     && gcc --version \
