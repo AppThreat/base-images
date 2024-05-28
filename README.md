@@ -22,11 +22,17 @@ Java 17 version
 docker run --rm -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17:v10 -r /app -o /app/bom.json -t java
 ```
 
-### Dotnet Core 3.1 and Dotnet 6.0 applications
+### .Net Framework, .Net Core 3.1, and .Net 6.0 applications
 
 Use the unofficial image `ghcr.io/appthreat/cdxgen-dotnet:v10`.
 
 Example invocation:
+
+.Net Framework 4.7
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet6:v10 -r /app -o /app/bom.json -t dotnet-framework
+```
 
 Dotnet 3.1 or Dotnet 6.0
 
