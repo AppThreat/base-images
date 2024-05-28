@@ -11,7 +11,7 @@ ENV MAVEN_VERSION=$MAVEN_VERSION \
 ENV PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:
 RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
         python312 python312-devel python312-pip findutils java-22-openjdk-devel \
-        git-core wget zip unzip make gawk nodejs22 npm22 \
+        git-core wget zip unzip make gawk nodejs22 npm22 rust1.78 cargo1.78 \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
     && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-14 10 \
@@ -22,6 +22,7 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
+    && python -m pip install poetry pipenv \
     && node -v \
     && npm -v \
     && gcc --version \
