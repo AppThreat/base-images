@@ -1,49 +1,30 @@
 FROM opensuse/tumbleweed:latest as builder
 
-ARG JAVA_VERSION=22.0.1-tem
-ARG MAVEN_VERSION=3.9.6
-ARG NODE_VERSION=22.2.0
+ARG MAVEN_VERSION=4.0.0-beta-3
 
-ENV JAVA_VERSION=$JAVA_VERSION \
-    MAVEN_VERSION=$MAVEN_VERSION \
+ENV MAVEN_VERSION=$MAVEN_VERSION \
     JAVA_HOME="/opt/java/${JAVA_VERSION}" \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
-    LANGUAGE=en_US.UTF-8 \
-    NVM_DIR="/root/.nvm"
-ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
-RUN set -e; \
-    ARCH_NAME="$(rpm --eval '%{_arch}')"; \
-    url=; \
-    case "${ARCH_NAME##*-}" in \
-        'x86_64') \
-            OS_ARCH_SUFFIX=''; \
-            GOBIN_VERSION='amd64'; \
-            ;; \
-        'aarch64') \
-            OS_ARCH_SUFFIX='-aarch64'; \
-            GOBIN_VERSION='arm64'; \
-            ;; \
-        *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
-    esac; \
-    zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
-        python312 python312-devel python312-pip findutils \
-        git-core wget zip unzip make gawk \
+    LANGUAGE=en_US.UTF-8
+ENV PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
+RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
+        python312 python312-devel python312-pip findutils java-22-openjdk-devel \
+        git-core wget zip unzip make gawk nodejs22 npm22 rust1.78 cargo1.78 \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
     && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-14 10 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.12 10 \
     && curl -s "https://get.sdkman.io" | bash \
     && source "$HOME/.sdkman/bin/sdkman-init.sh" \
     && echo -e "sdkman_auto_answer=true\nsdkman_selfupdate_feature=false\nsdkman_auto_env=true\nsdkman_curl_connect_timeout=20\nsdkman_curl_max_time=0" >> $HOME/.sdkman/etc/config \
-    && sdk install java $JAVA_VERSION \
     && sdk install maven $MAVEN_VERSION \
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
-    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
-    && source /root/.nvm/nvm.sh \
-    && nvm install ${NODE_VERSION} \
+    && mkdir /opt/pypi \
+    && python -m pip install poetry pipenv blint --target /opt/pypi \
     && node -v \
     && npm -v \
     && gcc --version \
