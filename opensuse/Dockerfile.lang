@@ -1,8 +1,7 @@
 FROM opensuse/tumbleweed:latest as builder
 
 ARG JAVA_VERSION=22.0.1-tem
-ARG MAVEN_VERSION=3.9.6
-ARG NODE_VERSION=22.2.0
+ARG MAVEN_VERSION=4.0.0-beta-3
 
 ENV JAVA_VERSION=$JAVA_VERSION \
     MAVEN_VERSION=$MAVEN_VERSION \
@@ -10,9 +9,8 @@ ENV JAVA_VERSION=$JAVA_VERSION \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
-    LANGUAGE=en_US.UTF-8 \
-    NVM_DIR="/root/.nvm"
-ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
+    LANGUAGE=en_US.UTF-8
+ENV PATH=${PATH}:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
 RUN set -e; \
     ARCH_NAME="$(rpm --eval '%{_arch}')"; \
     url=; \
@@ -29,7 +27,7 @@ RUN set -e; \
     esac; \
     zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
         python312 python312-devel python312-pip findutils \
-        git-core wget zip unzip make gawk \
+        git-core wget zip unzip make gawk nodejs22 npm22 \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
     && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-14 10 \
@@ -41,9 +39,6 @@ RUN set -e; \
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
-    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
-    && source /root/.nvm/nvm.sh \
-    && nvm install ${NODE_VERSION} \
     && node -v \
     && npm -v \
     && gcc --version \
