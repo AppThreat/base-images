@@ -1,8 +1,7 @@
 FROM registry.suse.com/bci/dotnet-sdk:6.0 as builder
 
-ENV DOTNET_CLI_TELEMETRY_OPTOUT=1 \
-    IS_MONO=true \
-    NUGET_EXE="/usr/lib/mono/nuget/NuGet.exe"
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+
 RUN zypper --non-interactive refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends git-core nodejs20 npm20 \
         python311 python311-pip wget zip unzip make gawk \
     && rpm -Uvh https://packages.microsoft.com/config/sles/15/packages-microsoft-prod.rpm \
@@ -10,6 +9,11 @@ RUN zypper --non-interactive refresh && zypper --non-interactive update && zyppe
     && zypper --non-interactive addrepo -G -f -K https://download.opensuse.org/repositories/Mono/SLE_15_SP1/Mono.repo \
     && zypper --non-interactive addrepo -G -f -K  https://download.opensuse.org/repositories/graphics/openSUSE_Factory/graphics.repo \
     && zypper --non-interactive install --allow-unsigned-rpm -l --no-recommends mono-complete mono-nuget mono-nuget-devel libexif12 libexif-devel \
+    && echo -e '#!/bin/sh\nexec /usr/bin/mono /usr/lib/mono/nuget/NuGet.exe "$@"\n' > /usr/bin/nuget \
+    && curl -L "https://github.com/mono/nuget-binary/raw/2.12/NuGet.exe" -o /usr/lib/mono/nuget/NuGet.exe \
+    && curl -L "https://github.com/mono/nuget-binary/raw/2.12/NuGet.Core.dll" -o /usr/lib/mono/nuget/NuGet.Core.dll \
+    && curl -L "https://github.com/mono/nuget-binary/raw/2.12/Microsoft.Web.XmlTransform.dll" -o /usr/lib/mono/nuget/Microsoft.Web.XmlTransform.dll \
+    && chmod +x /usr/bin/nuget \
     && dotnet --list-sdks \
     && zypper clean -a
 
