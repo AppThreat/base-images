@@ -12,6 +12,6 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-rolling:v10 -r /app --server"
 
 RUN npm install -g @cyclonedx/cdxgen --omit=dev \
-    && pip install blint
+    && python -m pip install blint
 
 ENTRYPOINT ["cdxgen"]
