@@ -1,14 +1,18 @@
 FROM opensuse/tumbleweed:latest as builder
 
 ARG MAVEN_VERSION=4.0.0-beta-3
+ARG SBT_VERSION=1.9.8
+ARG GRADLE_VERSION=8.8
 
-ENV MAVEN_VERSION=$MAVEN_VERSION \
+ENV SBT_VERSION=$SBT_VERSION \
+    MAVEN_VERSION=$MAVEN_VERSION \
+    GRADLE_VERSION=$GRADLE_VERSION \
     JAVA_HOME="/opt/java/${JAVA_VERSION}" \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
-ENV PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
+ENV PATH=${PATH}:${MAVEN_HOME}/bin:${GRADLE_HOME}/bin:${SBT_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
 RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
         python312 python312-devel python312-pip findutils java-22-openjdk-devel \
         git-core wget zip unzip make gawk nodejs22 npm22 rust1.78 cargo1.78 \
@@ -20,6 +24,8 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && source "$HOME/.sdkman/bin/sdkman-init.sh" \
     && echo -e "sdkman_auto_answer=true\nsdkman_selfupdate_feature=false\nsdkman_auto_env=true\nsdkman_curl_connect_timeout=20\nsdkman_curl_max_time=0" >> $HOME/.sdkman/etc/config \
     && sdk install maven $MAVEN_VERSION \
+    && sdk install gradle $GRADLE_VERSION \
+    && sdk install sbt $SBT_VERSION \
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \

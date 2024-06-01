@@ -1,0 +1,18 @@
+FROM ghcr.io/appthreat/cdxgen-rolling:v10
+
+LABEL maintainer="AppThreat" \
+      org.opencontainers.image.authors="Team AppThreat <cloud@appthreat.com>" \
+      org.opencontainers.image.source="https://github.com/AppThreat/base-images" \
+      org.opencontainers.image.url="https://github.com/AppThreat/base-images" \
+      org.opencontainers.image.version="rolling" \
+      org.opencontainers.image.vendor="AppThreat" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.title="cdxgen" \
+      org.opencontainers.image.description="Rolling image with OWASP dep-scan based on tumbleweed" \
+      org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/depscan-rolling:v5 --src /app --reports-dir /app/reports"
+
+ENV PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
+
+RUN python -m pip install owasp-depscan --target /opt/pypi
+
+ENTRYPOINT ["depscan"]
