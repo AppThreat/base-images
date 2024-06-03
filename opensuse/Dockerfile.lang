@@ -3,22 +3,40 @@ FROM opensuse/tumbleweed:latest as builder
 ARG MAVEN_VERSION=4.0.0-beta-3
 ARG SBT_VERSION=1.9.8
 ARG GRADLE_VERSION=8.8
-ARG DOTNET_VERSION=9.0.100-preview.4
+ARG DOTNET_SDK_VERSION=9.0.100-preview.4.24267.66
 
 ENV SBT_VERSION=$SBT_VERSION \
     MAVEN_VERSION=$MAVEN_VERSION \
     GRADLE_VERSION=$GRADLE_VERSION \
-    DOTNET_VERSION=$DOTNET_VERSION \
+    DOTNET_SDK_VERSION=$DOTNET_SDK_VERSION \
+    DOTNET_GENERATE_ASPNET_CERTIFICATE=false \
+    DOTNET_NOLOGO=true \
+    DOTNET_USE_POLLING_FILE_WATCHER=true \
+    DOTNET_RUNNING_IN_CONTAINER=true \
+    NUGET_XMLDOC_MODE=skip \
     JAVA_HOME="/opt/java/${JAVA_VERSION}" \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
-    DOTNET_ROOT=/opt/dotnet
-ENV PATH=${PATH}:${MAVEN_HOME}/bin:${GRADLE_HOME}/bin:${SBT_HOME}/bin:/usr/local/bin:/opt/pypi/bin:/opt/dotnet:
-RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
+    DOTNET_ROOT=/usr/share/dotnet
+
+ENV PATH=${PATH}:${MAVEN_HOME}/bin:${GRADLE_HOME}/bin:${SBT_HOME}/bin:/usr/local/bin:/opt/pypi/bin:/usr/share/dotnet:
+RUN set -e; \
+    ARCH_NAME="$(rpm --eval '%{_arch}')"; \
+    url=; \
+    case "${ARCH_NAME##*-}" in \
+        'x86_64') \
+            OS_ARCH_SUFFIX='x64'; \
+            ;; \
+        'aarch64') \
+            OS_ARCH_SUFFIX='arm64'; \
+            ;; \
+        *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
+    esac \
+    && zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
         python312 python312-devel python312-pip findutils java-22-openjdk-devel \
-        git-core wget zip unzip make gawk nodejs22 npm22 rust1.78 cargo1.78 \
+        libicu-devel git-core wget zip unzip make gawk nodejs22 npm22 rust1.78 cargo1.78 \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
     && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-14 10 \
@@ -32,9 +50,10 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
-    && curl -LO https://download.visualstudio.microsoft.com/download/pr/87f2eabb-8ba2-4677-9f91-526672f51857/9ed7fb997d40a369c038269a514fc4e4/dotnet-sdk-9.0.100-preview.4.24267.66-linux-x64.tar.gz \
-    && mkdir -p /opt/dotnet && tar zxf dotnet-sdk-9.0.100-preview.4.24267.66-linux-x64.tar.gz -C /opt/dotnet \
-    && rm dotnet-sdk-9.0.100-preview.4.24267.66-linux-x64.tar.gz \
+    && curl -fSL --output dotnet.tar.gz https://dotnetcli.azureedge.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-sdk-$DOTNET_SDK_VERSION-linux-${OS_ARCH_SUFFIX}.tar.gz \
+    && mkdir -p /usr/share/dotnet \
+    && tar -xf dotnet.tar.gz -C /usr/share/dotnet \
+    && rm dotnet.tar.gz \
     && dotnet --list-sdks \
     && mkdir /opt/pypi \
     && python -m pip install poetry pipenv blint --target /opt/pypi \
