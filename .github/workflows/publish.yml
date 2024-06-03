@@ -838,7 +838,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
-        id: meta-opensuse-lang
+        id: meta-opensuse-python310
         uses: docker/metadata-action@v5
         with:
           images: |
