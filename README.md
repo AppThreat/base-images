@@ -28,7 +28,9 @@ Use the unofficial image `ghcr.io/appthreat/cdxgen-dotnet:v10`.
 
 Example invocation:
 
-.Net Framework 4.7
+.Net Framework 4.6 - 4.8
+
+A bundled version of [nuget](./nuget/) and mono is used to support .Net framework apps.
 
 ```shell
 docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet6:v10 -r /app -o /app/bom.json -t dotnet-framework
@@ -44,6 +46,22 @@ Dotnet 7.0
 
 ```shell
 docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet7:v10 -r /app -o /app/bom.json -t dotnet
+```
+
+Dotnet 8.0
+
+Dotnet 8 is also bundled with the official `ghcr.io/cyclonedx/cdxgen` image.
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet8:v10 -r /app -o /app/bom.json -t dotnet
+```
+
+Dotnet 9.0
+
+Use the `cdxgen-rolling` image for testing dotnet 9 apps.
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-rolling:v10 -r /app -o /app/bom.json -t dotnet
 ```
 
 ### Python applications
@@ -69,3 +87,7 @@ docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-pytho
 MIT
 
 NOTE: No FREE support will be offered for users of these images. Pull Requests are NOT accepted.
+
+## Useful links
+
+- [Identifying .Net vs .Net Framework](https://learn.microsoft.com/en-us/dotnet/standard/frameworks)
