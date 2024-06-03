@@ -70,6 +70,12 @@ Use the unofficial image `ghcr.io/appthreat/cdxgen-python312:v10` or `ghcr.io/ap
 
 Example invocation:
 
+Python 3.6
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python36:v10 -r /app -o /app/bom.json -t python
+```
+
 Python 3.12
 
 ```shell
