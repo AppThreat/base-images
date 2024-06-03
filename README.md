@@ -76,6 +76,12 @@ Python 3.6
 docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python36:v10 -r /app -o /app/bom.json -t python
 ```
 
+Python 3.9
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python39:v10 -r /app -o /app/bom.json -t python
+```
+
 Python 3.10
 
 ```shell
