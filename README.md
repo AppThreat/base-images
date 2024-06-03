@@ -82,16 +82,16 @@ Python 3.10
 docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python310:v10 -r /app -o /app/bom.json -t python
 ```
 
-Python 3.12
-
-```shell
-docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python312:v10 -r /app -o /app/bom.json -t python
-```
-
 Python 3.11
 
 ```shell
 docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python311:v10 -r /app -o /app/bom.json -t python
+```
+
+Python 3.12
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python312:v10 -r /app -o /app/bom.json -t python
 ```
 
 ## License
