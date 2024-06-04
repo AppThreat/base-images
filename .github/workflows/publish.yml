@@ -194,15 +194,28 @@ jobs:
         with:
           images: |
             ghcr.io/appthreat/cdxgen-dotnet
+            ghcr.io/appthreat/cdxgen-dotnet6
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-dotnet:latest,ghcr.io/appthreat/cdxgen-dotnet:v10,ghcr.io/appthreat/cdxgen-dotnet6:latest,ghcr.io/appthreat/cdxgen-dotnet6:v10
+          tags: ghcr.io/appthreat/cdxgen-dotnet:v10,ghcr.io/appthreat/cdxgen-dotnet6:v10
+          labels: ${{ steps.cdxgen-dotnet.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.dotnet
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.cdxgen-dotnet.outputs.tags }}
           labels: ${{ steps.cdxgen-dotnet.outputs.labels }}
 
   sle-dotnet7-image:
@@ -271,12 +284,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet7
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-dotnet7:latest,ghcr.io/appthreat/cdxgen-dotnet7:v10
+          tags: ghcr.io/appthreat/cdxgen-dotnet7:v10
+          labels: ${{ steps.cdxgen-dotnet7.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.dotnet7
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.cdxgen-dotnet7.outputs.tags }}
           labels: ${{ steps.cdxgen-dotnet7.outputs.labels }}
 
   sle-dotnet8-image:
@@ -345,12 +370,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet8
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-dotnet8:latest,ghcr.io/appthreat/cdxgen-dotnet8:v10
+          tags: ghcr.io/appthreat/cdxgen-dotnet8:v10
+          labels: ${{ steps.cdxgen-dotnet8.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.dotnet8
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.cdxgen-dotnet8.outputs.tags }}
           labels: ${{ steps.cdxgen-dotnet8.outputs.labels }}
 
   sle-java-image:
@@ -416,15 +453,28 @@ jobs:
         with:
           images: |
             ghcr.io/appthreat/cdxgen-java
+            ghcr.io/appthreat/cdxgen-java11
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.java
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-java:latest,ghcr.io/appthreat/cdxgen-java:v10,ghcr.io/appthreat/cdxgen-java11:latest,ghcr.io/appthreat/cdxgen-java11:v10
+          tags: ghcr.io/appthreat/cdxgen-java:v10,ghcr.io/appthreat/cdxgen-java11:v10
+          labels: ${{ steps.meta-cdxgen-java.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.java
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-cdxgen-java.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-java.outputs.labels }}
 
   sle-java17-image:
@@ -493,12 +543,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.java17
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-java17:latest,ghcr.io/appthreat/cdxgen-java17:v10
+          tags: ghcr.io/appthreat/cdxgen-java17:v10
+          labels: ${{ steps.meta-cdxgen-java17.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.java17
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-cdxgen-java17.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-java17.outputs.labels }}
 
   cdxgen-python-image:
@@ -531,12 +593,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.python
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-python:latest,ghcr.io/appthreat/cdxgen-python:v10,ghcr.io/appthreat/cdxgen-python312:latest,ghcr.io/appthreat/cdxgen-python312:v10
+          tags: ghcr.io/appthreat/cdxgen-python:v10,ghcr.io/appthreat/cdxgen-python312:v10
+          labels: ${{ steps.meta-cdxgen-python.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.python
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-cdxgen-python.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-python.outputs.labels }}
 
   sle-python311-image:
@@ -605,12 +679,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.python311
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-python311:latest,ghcr.io/appthreat/cdxgen-python311:v10
+          tags: ghcr.io/appthreat/cdxgen-python311:v10
+          labels: ${{ steps.meta-cdxgen-python311.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.python311
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-cdxgen-python311.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-python311.outputs.labels }}
 
   sle-python36-image:
@@ -679,12 +765,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.python36
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-python36:latest,ghcr.io/appthreat/cdxgen-python36:v10
+          tags: ghcr.io/appthreat/cdxgen-python36:v10
+          labels: ${{ steps.meta-cdxgen-python36.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.python36
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-cdxgen-python36.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-python36.outputs.labels }}
 
   opensuse-lang-image:
@@ -753,12 +851,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.rolling
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-rolling:latest,ghcr.io/appthreat/cdxgen-rolling:v10
+          tags: ghcr.io/appthreat/cdxgen-rolling:v10
+          labels: ${{ steps.meta-cdxgen-rolling.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.rolling
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-cdxgen-rolling.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-rolling.outputs.labels }}
 
   depscan-rolling-image:
@@ -790,12 +900,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: depscan/Dockerfile.rolling
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/depscan-rolling:latest,ghcr.io/appthreat/depscan-rolling:v5
+          tags: ghcr.io/appthreat/depscan-rolling:v5
+          labels: ${{ steps.meta-depscan-rolling.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: depscan/Dockerfile.rolling
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-depscan-rolling.outputs.tags }}
           labels: ${{ steps.meta-depscan-rolling.outputs.labels }}
 
   sle-llvm-image:
@@ -884,12 +1006,24 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.python310
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-python310:latest,ghcr.io/appthreat/cdxgen-python310:v10
+          tags: ghcr.io/appthreat/cdxgen-python310:v10
+          labels: ${{ steps.meta-cdxgen-python310.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.python310
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-cdxgen-python310.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-python310.outputs.labels }}
 
   opensuse-python39-image:
@@ -958,10 +1092,22 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
+        if: github.ref == 'refs/heads/main'
         with:
           context: .
           file: cdxgen/Dockerfile.python39
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/appthreat/cdxgen-python39:latest,ghcr.io/appthreat/cdxgen-python39:v10
+          tags: ghcr.io/appthreat/cdxgen-python39:v10
+          labels: ${{ steps.meta-cdxgen-python39.outputs.labels }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          context: .
+          file: cdxgen/Dockerfile.python39
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta-cdxgen-python39.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-python39.outputs.labels }}
