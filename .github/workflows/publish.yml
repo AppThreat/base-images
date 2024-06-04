@@ -205,7 +205,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/appthreat/cdxgen-dotnet:v10,ghcr.io/appthreat/cdxgen-dotnet6:v10
-          labels: ${{ steps.cdxgen-dotnet.outputs.labels }}
+          labels: ${{ steps.meta-cdxgen-dotnet.outputs.labels }}
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
@@ -215,8 +215,8 @@ jobs:
           file: cdxgen/Dockerfile.dotnet
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.cdxgen-dotnet.outputs.tags }}
-          labels: ${{ steps.cdxgen-dotnet.outputs.labels }}
+          tags: ${{ steps.meta-cdxgen-dotnet.outputs.tags }}
+          labels: ${{ steps.meta-cdxgen-dotnet.outputs.labels }}
 
   sle-dotnet7-image:
     runs-on: ubuntu-latest
@@ -291,7 +291,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/appthreat/cdxgen-dotnet7:v10
-          labels: ${{ steps.cdxgen-dotnet7.outputs.labels }}
+          labels: ${{ steps.meta-cdxgen-dotnet7.outputs.labels }}
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
@@ -301,8 +301,8 @@ jobs:
           file: cdxgen/Dockerfile.dotnet7
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.cdxgen-dotnet7.outputs.tags }}
-          labels: ${{ steps.cdxgen-dotnet7.outputs.labels }}
+          tags: ${{ steps.meta-cdxgen-dotnet7.outputs.tags }}
+          labels: ${{ steps.meta-cdxgen-dotnet7.outputs.labels }}
 
   sle-dotnet8-image:
     runs-on: ubuntu-latest
@@ -377,7 +377,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/appthreat/cdxgen-dotnet8:v10
-          labels: ${{ steps.cdxgen-dotnet8.outputs.labels }}
+          labels: ${{ steps.meta-cdxgen-dotnet8.outputs.labels }}
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
@@ -387,8 +387,8 @@ jobs:
           file: cdxgen/Dockerfile.dotnet8
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.cdxgen-dotnet8.outputs.tags }}
-          labels: ${{ steps.cdxgen-dotnet8.outputs.labels }}
+          tags: ${{ steps.meta-cdxgen-dotnet8.outputs.tags }}
+          labels: ${{ steps.meta-cdxgen-dotnet8.outputs.labels }}
 
   sle-java-image:
     runs-on: ubuntu-latest
