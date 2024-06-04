@@ -860,17 +860,6 @@ jobs:
           tags: ghcr.io/appthreat/cdxgen-rolling:v10
           labels: ${{ steps.meta-cdxgen-rolling.outputs.labels }}
 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v5
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          context: .
-          file: cdxgen/Dockerfile.rolling
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.meta-cdxgen-rolling.outputs.tags }}
-          labels: ${{ steps.meta-cdxgen-rolling.outputs.labels }}
-
   depscan-rolling-image:
     runs-on: ubuntu-latest
     needs: cdxgen-rolling-image
@@ -907,17 +896,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/appthreat/depscan-rolling:v5
-          labels: ${{ steps.meta-depscan-rolling.outputs.labels }}
-
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v5
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          context: .
-          file: depscan/Dockerfile.rolling
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.meta-depscan-rolling.outputs.tags }}
           labels: ${{ steps.meta-depscan-rolling.outputs.labels }}
 
   sle-llvm-image:
