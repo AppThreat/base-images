@@ -11,7 +11,8 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.image.description="Rolling image with OWASP dep-scan based on tumbleweed" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/depscan-rolling:v5 --src /app --reports-dir /app/reports"
 
-ENV PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
+ENV PREFER_MAVEN_DEPS_TREE=true \
+    PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
 
 RUN python -m pip install owasp-depscan --target /opt/pypi
 
