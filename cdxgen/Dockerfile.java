@@ -11,6 +11,8 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.image.description="Rolling image with cdxgen SBOM generator for Java 11 apps" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java:v10 -r /app --server"
 
+ENV CDXGEN_NO_BANNER=true
+
 RUN npm install -g @cyclonedx/cdxgen --omit=dev
 
 ENTRYPOINT ["cdxgen"]
