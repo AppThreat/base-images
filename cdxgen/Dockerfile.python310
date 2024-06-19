@@ -11,7 +11,8 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.image.description="Rolling image with cdxgen SBOM generator for python 3.10 apps" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python310:v10 -r /app --server"
 
-ENV CDXGEN_NO_BANNER=true
+ENV CDXGEN_NO_BANNER=true \
+    FETCH_LICENSE=true
 
 RUN zypper --non-interactive install --allow-downgrade -l --no-recommends readline-devel clang13 llvm13 llvm13-devel libjpeg62-devel libmariadb-devel \
         postgresql16-devel postgresql16-server-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel \
