@@ -66,15 +66,17 @@ docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-rolli
 
 ### Python applications
 
-Use the unofficial image `ghcr.io/appthreat/cdxgen-python312:v10` or `ghcr.io/appthreat/cdxgen-python311:v10`. This includes additional build tools and libraries to build a range of Python applications.
+Use the unofficial image `ghcr.io/appthreat/cdxgen-python312:v10` or `ghcr.io/appthreat/cdxgen-python311:v10`. This includes additional build tools and libraries to build a range of Python applications. Construction of the dependency tree is supported with Python >= 3.9.
 
 Example invocation:
 
-Python 3.6
+Python 3.6 (Direct dependencies only without dependency tree)
 
 ```shell
 docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python36:v10 -r /app -o /app/bom.json -t python
 ```
+
+NOTE: dependency tree is unavailable with Python 3.6
 
 Python 3.9
 
