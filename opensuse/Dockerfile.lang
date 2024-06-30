@@ -1,4 +1,4 @@
-FROM opensuse/tumbleweed:latest as builder
+FROM opensuse/tumbleweed:latest
 
 ARG MAVEN_VERSION=4.0.0-beta-3
 ARG SBT_VERSION=1.9.8

@@ -1,4 +1,4 @@
-FROM registry.opensuse.org/opensuse/bci/python:3.10 as builder
+FROM registry.opensuse.org/opensuse/bci/python:3.10
 
 ENV LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \

@@ -102,6 +102,32 @@ Python 3.12
 docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python312:v10 -r /app -o /app/bom.json -t python
 ```
 
+### Node.js applications
+
+Use the unofficial image `ghcr.io/appthreat/cdxgen-node20:v10`.
+
+Node.js 20
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-node20:v10 -r /app -o /app/bom.json -t js
+```
+
+## Troubleshooting
+
+### Enable verbose output
+
+Include the below argument to the docker run command (anywhere before the -t argument) to increase the verbosity of the output log.
+
+```
+-e CDXGEN_DEBUG_MODE=debug
+```
+
+Example:
+
+```shell
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-node20:v10 -r /app -o /app/bom.json -t js
+```
+
 ## License
 
 MIT

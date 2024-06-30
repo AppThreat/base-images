@@ -1,4 +1,4 @@
-FROM registry.suse.com/bci/python:3.6 as builder
+FROM registry.suse.com/bci/python:3.6
 
 ARG JAVA_VERSION=22.0.1-tem
 ARG MAVEN_VERSION=3.9.7
