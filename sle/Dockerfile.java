@@ -1,4 +1,4 @@
-FROM registry.suse.com/bci/openjdk-devel:11 as builder
+FROM registry.suse.com/bci/openjdk-devel:11
 
 ARG SBT_VERSION=1.8.3
 ARG MAVEN_VERSION=3.6.3

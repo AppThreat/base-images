@@ -1,4 +1,4 @@
-FROM registry.suse.com/bci/python:3.11 as builder
+FROM registry.suse.com/bci/python:3.11
 
 ARG JAVA_VERSION=22.0.1-tem
 ARG MAVEN_VERSION=3.9.7
@@ -30,6 +30,8 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
     && source /root/.nvm/nvm.sh \
     && nvm install ${NODE_VERSION} \
+    && npm install -g node-gyp \
+    && npx node-gyp install \
     && node -v \
     && npm -v \
     && gcc --version \

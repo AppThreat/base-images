@@ -1,4 +1,4 @@
-FROM registry.suse.com/bci/dotnet-sdk:6.0 as builder
+FROM registry.suse.com/bci/dotnet-sdk:6.0
 
 ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false \
     DOTNET_NOLOGO=true \

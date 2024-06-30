@@ -1,0 +1,26 @@
+FROM registry.suse.com/bci/nodejs:20
+
+ARG JAVA_VERSION=22.0.1-tem
+
+ENV JAVA_VERSION=$JAVA_VERSION \
+    JAVA_HOME="/opt/java/${JAVA_VERSION}" \
+    LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8
+ENV PATH=${PATH}:${JAVA_HOME}/bin:/usr/local/bin:
+RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends \
+        bzip2 git-core wget zip unzip make gawk python311 python311-pip python311-devel nodejs20-devel \
+    && curl -s "https://get.sdkman.io" | bash \
+    && source "$HOME/.sdkman/bin/sdkman-init.sh" \
+    && echo -e "sdkman_auto_answer=true\nsdkman_selfupdate_feature=false\nsdkman_auto_env=true\nsdkman_curl_connect_timeout=20\nsdkman_curl_max_time=0" >> $HOME/.sdkman/etc/config \
+    && sdk install java $JAVA_VERSION \
+    && sdk offline enable \
+    && mv /root/.sdkman/candidates/* /opt/ \
+    && rm -rf /root/.sdkman \
+    && npm install -g node-gyp \
+    && npx node-gyp install \
+    && node -v \
+    && npm -v \
+    && zypper clean -a
+
+CMD /bin/bash
