@@ -31,6 +31,7 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && source /root/.nvm/nvm.sh \
     && nvm install ${NODE_VERSION} \
     && npm install -g node-gyp \
+    && npx node-gyp install \
     && node -v \
     && npm -v \
     && gcc --version \

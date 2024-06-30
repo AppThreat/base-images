@@ -18,6 +18,7 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
     && npm install -g node-gyp \
+    && npx node-gyp install \
     && node -v \
     && npm -v \
     && zypper clean -a
