@@ -58,7 +58,7 @@ RUN set -e; \
     && rm dotnet.tar.gz \
     && dotnet --list-sdks \
     && mkdir /opt/pypi \
-    && python -m pip install poetry pipenv blint custom-json-diff --target /opt/pypi \
+    && python -m pip install --no-cache-dir poetry pipenv blint custom-json-diff --target /opt/pypi \
     && node -v \
     && npm -v \
     && gcc --version \

@@ -14,6 +14,6 @@ LABEL maintainer="AppThreat" \
 ENV PREFER_MAVEN_DEPS_TREE=true \
     PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
 
-RUN python -m pip install owasp-depscan --target /opt/pypi
+RUN python -m pip install --no-cache-dir owasp-depscan --target /opt/pypi
 
 ENTRYPOINT ["depscan"]

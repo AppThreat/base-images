@@ -16,8 +16,8 @@ ENV CDXGEN_NO_BANNER=true \
 
 RUN zypper --non-interactive install --allow-downgrade -l --no-recommends readline-devel clang13 llvm13 llvm13-devel libjpeg62-devel libmariadb-devel \
         postgresql16-devel postgresql16-server-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel \
-    && python -m pip install --upgrade pip virtualenv --target /opt/pypi \
-    && python -m pip install pipenv poetry blint custom-json-diff --target /opt/pypi \
+    && python -m pip install --no-cache-dir --upgrade pip virtualenv --target /opt/pypi \
+    && python -m pip install --no-cache-dir pipenv poetry blint custom-json-diff --target /opt/pypi \
     && npm install -g @cyclonedx/cdxgen --omit=dev \
     && zypper clean -a
 
