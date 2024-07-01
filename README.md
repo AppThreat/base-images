@@ -128,6 +128,23 @@ Example:
 docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-node20:v10 -r /app -o /app/bom.json -t js
 ```
 
+### Testing arm64 from x64 machines
+
+- Install [Rancher Desktop](https://rancherdesktop.io/) and setup [nerdctl](https://docs.rancherdesktop.io/tutorials/working-with-containers) instead of docker
+- Setup multi-platform by following this [doc](https://github.com/containerd/nerdctl/blob/main/docs/multi-platform.md)
+
+Include the below argument with the `nerdctl run` command.
+
+```
+--platform=linux/arm64
+```
+
+Example:
+
+```shell
+nerdctl run --rm --platform=linux/arm64 -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-node20:v10 -r /app -o /app/bom.json -t js
+```
+
 ## License
 
 MIT
