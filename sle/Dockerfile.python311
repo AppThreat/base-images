@@ -3,7 +3,7 @@ FROM registry.suse.com/bci/python:3.11
 ARG JAVA_VERSION=22.0.1-tem
 ARG MAVEN_VERSION=3.9.7
 ARG GCC_VERSION=12
-ARG NODE_VERSION=22.2.0
+ARG NODE_VERSION=20.15.0
 
 ENV JAVA_VERSION=$JAVA_VERSION \
     MAVEN_VERSION=$MAVEN_VERSION \
@@ -12,7 +12,8 @@ ENV JAVA_VERSION=$JAVA_VERSION \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
-    NVM_DIR="/root/.nvm"
+    NVM_DIR="/root/.nvm" \
+    npm_config_python=/usr/bin/python3.11
 ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
 RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc${GCC_VERSION} gcc${GCC_VERSION}-c++ gcc${GCC_VERSION}-fortran \
         bzip2 git-core wget zip unzip make gawk \
