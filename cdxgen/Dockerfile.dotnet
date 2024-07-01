@@ -14,6 +14,6 @@ LABEL maintainer="AppThreat" \
 ENV CDXGEN_NO_BANNER=true
 
 RUN npm install -g @cyclonedx/cdxgen --omit=dev \
-    && pip install blint
+    && pip install --no-cache-dir blint
 
 ENTRYPOINT ["cdxgen"]
