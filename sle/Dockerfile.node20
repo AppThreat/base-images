@@ -24,6 +24,7 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
+    && npm install -g npm \
     && npm install -g node-gyp \
     && npx node-gyp install \
     && node -v \

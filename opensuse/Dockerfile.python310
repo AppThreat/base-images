@@ -18,6 +18,7 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && mkdir /opt/pypi \
     && python -m pip install --no-cache-dir --upgrade pip virtualenv --target /opt/pypi \
     && python -m pip install --no-cache-dir poetry pipenv --target /opt/pypi \
+    && npm install -g npm \
     && npm install -g node-gyp \
     && npx node-gyp install \
     && node -v \
