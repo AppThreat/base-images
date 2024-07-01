@@ -1,0 +1,27 @@
+FROM python:3.11-slim
+
+ARG JAVA_VERSION=22.0.1-tem
+ARG MAVEN_VERSION=3.9.7
+ARG NODE_VERSION=20.15.0
+
+ENV JAVA_VERSION=$JAVA_VERSION \
+    MAVEN_VERSION=$MAVEN_VERSION \
+    JAVA_HOME="/opt/java/${JAVA_VERSION}" \
+    MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
+    LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    NVM_DIR="/root/.nvm" \
+    npm_config_python=/usr/bin/python3.11
+ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
+
+COPY ./debian/install.sh /tmp/
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl bash gcc bzip2 git-core zip unzip make gawk \
+    && chmod +x /tmp/install.sh \
+    && ./tmp/install.sh && rm /tmp/install.sh \
+    && node -v \
+    && npm -v \
+    && gcc --version \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    && rm -rf /var/lib/apt/lists/*
