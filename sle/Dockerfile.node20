@@ -1,7 +1,7 @@
 FROM registry.suse.com/bci/nodejs:20
 
 ARG JAVA_VERSION=22.0.1-tem
-ARG GCC_VERSION=12
+ARG GCC_VERSION=13
 
 ENV JAVA_VERSION=$JAVA_VERSION \
     JAVA_HOME="/opt/java/${JAVA_VERSION}" \
