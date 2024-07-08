@@ -12,6 +12,7 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet8:v10 -r /app --server"
 
 ENV CDXGEN_NO_BANNER=true \
+    CDXGEN_IN_CONTAINER=true \
     PYTHONPATH=/opt/pypi
 ENV PATH=${PATH}:/usr/local/bin:/opt/pypi/bin:
 

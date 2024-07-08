@@ -13,6 +13,7 @@ LABEL maintainer="AppThreat" \
 
 ENV PREFER_MAVEN_DEPS_TREE=true \
     PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin: \
+    CDXGEN_IN_CONTAINER=true \
     PYTHONPATH=/opt/pypi
 
 RUN python -m pip install --upgrade --no-cache-dir owasp-depscan blint custom-json-diff --target /opt/pypi \

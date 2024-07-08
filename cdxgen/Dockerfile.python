@@ -22,6 +22,7 @@ ENV NVM_DIR="/root/.nvm" \
     LANGUAGE=en_US.UTF-8 \
     CDXGEN_NO_BANNER=true \
     FETCH_LICENSE=true \
+    CDXGEN_IN_CONTAINER=true \
     PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
 
 RUN source /root/.nvm/nvm.sh \

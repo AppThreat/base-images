@@ -3,6 +3,7 @@ FROM ghcr.io/appthreat/opensuse-lang:main
 ENV PREFER_MAVEN_DEPS_TREE=true \
     CDXGEN_DEBUG_MODE=debug \
     SCAN_DEBUG_MODE=debug \
+    CDXGEN_IN_CONTAINER=true \
     PYTHONPATH=/opt/pypi
 ENV PATH=${PATH}:/usr/local/bin:/opt/pypi/bin:
 
