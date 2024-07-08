@@ -10,7 +10,7 @@ sdk offline enable
 mv /root/.sdkman/candidates/* /opt/
 rm -rf /root/.sdkman
 python3 -m pip install --no-cache-dir --upgrade pip virtualenv
-python3 -m pip install --no-cache-dir --user pipenv poetry
+python3 -m pip install --no-cache-dir --upgrade --user pipenv poetry
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 chmod +x /root/.nvm/nvm.sh
 source /root/.nvm/nvm.sh

@@ -2,7 +2,9 @@ FROM ghcr.io/appthreat/opensuse-lang:main
 
 ENV PREFER_MAVEN_DEPS_TREE=true \
     CDXGEN_DEBUG_MODE=debug \
-    SCAN_DEBUG_MODE=debug
+    SCAN_DEBUG_MODE=debug \
+    PYTHONPATH=/opt/pypi
+ENV PATH=${PATH}:/usr/local/bin:/opt/pypi/bin:
 
 LABEL maintainer="AppThreat" \
       org.opencontainers.image.authors="Team AppThreat <cloud@appthreat.com>" \
@@ -15,6 +17,7 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.image.description="Rolling image with cdxgen SBOM generator based on tumbleweed" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-rolling:v10 -r /app --server"
 
-RUN npm install -g git+https://github.com/CycloneDX/cdxgen --omit=dev
+RUN npm install -g git+https://github.com/CycloneDX/cdxgen --omit=dev \
+    && pip install --upgrade --no-cache-dir blint --target /opt/pypi
 
 ENTRYPOINT ["cdxgen"]

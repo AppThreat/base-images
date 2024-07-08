@@ -14,14 +14,14 @@ ENV SBT_VERSION=$SBT_VERSION \
     DOTNET_USE_POLLING_FILE_WATCHER=true \
     DOTNET_RUNNING_IN_CONTAINER=true \
     NUGET_XMLDOC_MODE=skip \
-    JAVA_HOME="/opt/java/${JAVA_VERSION}" \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
     GRADLE_HOME="/opt/gradle/${GRADLE_VERSION}" \
     SBT_HOME="/opt/sbt/${SBT_VERSION}" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
-    DOTNET_ROOT=/usr/share/dotnet
+    DOTNET_ROOT=/usr/share/dotnet \
+    PYTHONPATH=/opt/pypi
 
 ENV PATH=${PATH}:${MAVEN_HOME}/bin:${GRADLE_HOME}/bin:${SBT_HOME}/bin:/usr/local/bin:/opt/pypi/bin:/usr/share/dotnet:
 RUN set -e; \
@@ -58,9 +58,12 @@ RUN set -e; \
     && rm dotnet.tar.gz \
     && dotnet --list-sdks \
     && mkdir /opt/pypi \
-    && python -m pip install --no-cache-dir poetry pipenv blint custom-json-diff --target /opt/pypi \
+    && python -m pip install --no-cache-dir --upgrade poetry pipenv blint custom-json-diff --target /opt/pypi \
     && node -v \
     && npm -v \
+    && poetry --version \
+    && pipenv --version \
+    && blint --help \
     && gcc --version \
     && zypper clean -a
 

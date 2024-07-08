@@ -11,9 +11,11 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.image.description="Rolling image with cdxgen SBOM generator for legacy .Net Core and .Net Framework apps" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet:v10 -r /app --server"
 
-ENV CDXGEN_NO_BANNER=true
+ENV CDXGEN_NO_BANNER=true \
+    PYTHONPATH=/opt/pypi
+ENV PATH=${PATH}:/usr/local/bin:/opt/pypi/bin:
 
 RUN npm install -g @cyclonedx/cdxgen --omit=dev \
-    && pip install --no-cache-dir blint
+    && pip install --upgrade --no-cache-dir blint --target /opt/pypi
 
 ENTRYPOINT ["cdxgen"]
