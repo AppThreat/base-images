@@ -13,8 +13,9 @@ ENV JAVA_VERSION=$JAVA_VERSION \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
     NVM_DIR="/root/.nvm" \
-    npm_config_python=/usr/bin/python3.11
-ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
+    npm_config_python=/usr/bin/python3.11 \
+    PYTHONPATH=/opt/pypi
+ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:
 RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc${GCC_VERSION} gcc${GCC_VERSION}-c++ gcc${GCC_VERSION}-fortran \
         bzip2 git-core wget zip unzip make gawk \
     && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-${GCC_VERSION} 10 \
@@ -30,7 +31,7 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
     && python3 -m pip install --no-cache-dir --upgrade pip virtualenv \
-    && python3 -m pip install --no-cache-dir --user pipenv poetry \
+    && python3 -m pip install --no-cache-dir --upgrade pipenv poetry --target /opt/pypi \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
     && source /root/.nvm/nvm.sh \
     && nvm install ${NODE_VERSION} \

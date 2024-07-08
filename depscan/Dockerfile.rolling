@@ -15,8 +15,8 @@ ENV PREFER_MAVEN_DEPS_TREE=true \
     PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin: \
     PYTHONPATH=/opt/pypi
 
-RUN python -m pip install --no-cache-dir owasp-depscan blint custom-json-diff --target /opt/pypi \
-    && depscan --help \
-    && blint --help
+RUN python -m pip install --upgrade --no-cache-dir owasp-depscan blint custom-json-diff --target /opt/pypi \
+    && /opt/pypi/bin/depscan --help \
+    && /opt/pypi/bin/blint --help
 
-ENTRYPOINT ["depscan"]
+ENTRYPOINT ["/opt/pypi/bin/depscan"]
