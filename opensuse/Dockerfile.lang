@@ -58,7 +58,6 @@ RUN set -e; \
     && rm dotnet.tar.gz \
     && dotnet --list-sdks \
     && mkdir /opt/pypi \
-    && python -m pip install --no-cache-dir --upgrade pip virtualenv \
     && python -m pip install --no-cache-dir --upgrade poetry pipenv blint custom-json-diff --target /opt/pypi \
     && node -v \
     && npm -v \
