@@ -13,6 +13,7 @@ LABEL maintainer="AppThreat" \
 
 ENV CDXGEN_NO_BANNER=true \
     CDXGEN_IN_CONTAINER=true \
+    SAFE_PIP_INSTALL=true \
     FETCH_LICENSE=true
 
 RUN zypper --non-interactive install --allow-downgrade -l --no-recommends readline-devel clang13 llvm13 llvm13-devel libjpeg62-devel libmariadb-devel \
