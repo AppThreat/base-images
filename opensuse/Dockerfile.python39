@@ -7,7 +7,21 @@ ENV LC_ALL=en_US.UTF-8 \
     PYTHONPATH=/opt/pypi
 
 ENV PATH=${PATH}:/usr/local/bin:/opt/pypi/bin:
-RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc12 gcc12-c++ gcc12-fortran \
+RUN set -e; \
+    ARCH_NAME="$(rpm --eval '%{_arch}')"; \
+    url=; \
+    case "${ARCH_NAME##*-}" in \
+        'x86_64') \
+            OS_ARCH_SUFFIX=''; \
+            GOBIN_VERSION='amd64'; \
+            ;; \
+        'aarch64') \
+            OS_ARCH_SUFFIX='-aarch64'; \
+            GOBIN_VERSION='arm64'; \
+            ;; \
+        *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
+    esac \
+    && zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc12 gcc12-c++ gcc12-fortran \
         python39 python39-devel python39-pip findutils java-22-openjdk-devel \
         bzip2 git-core wget zip unzip make gawk nodejs20 npm20 nodejs20-devel \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 10 \
@@ -24,6 +38,9 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && poetry --version \
     && pipenv --version \
     && gcc --version \
+    && curl -L --output /usr/bin/bazel https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-${GOBIN_VERSION} \
+    && chmod +x /usr/bin/bazel \
+    && bazel --version \
     && zypper clean -a
 
 CMD /bin/bash
