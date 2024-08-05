@@ -17,7 +17,7 @@ ENV CDXGEN_NO_BANNER=true \
     FETCH_LICENSE=true
 
 RUN zypper --non-interactive install --allow-downgrade -l --no-recommends readline-devel clang13 llvm13 llvm13-devel libjpeg62-devel libmariadb-devel \
-        postgresql16-devel postgresql16-server-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel \
+        postgresql16-devel postgresql16-server-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel graphviz-devel \
     && npm install -g @cyclonedx/cdxgen --omit=dev \
     && zypper clean -a
 
