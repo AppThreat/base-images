@@ -23,9 +23,8 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && chmod +x /usr/bin/nuget \
     && rm -rf /usr/lib/mono/nuget \
     && dotnet --list-sdks \
-    && mkdir -p $HOME/.sdkman/etc \
-    && echo -e "sdkman_auto_answer=true\nsdkman_selfupdate_feature=false\nsdkman_auto_env=true\nsdkman_curl_connect_timeout=60\nsdkman_curl_max_time=0" >> $HOME/.sdkman/etc/config \
     && curl -s "https://get.sdkman.io" | bash \
+    && echo -e "sdkman_auto_answer=true\nsdkman_selfupdate_feature=false\nsdkman_auto_env=true\nsdkman_curl_connect_timeout=60\nsdkman_curl_max_time=0" >> $HOME/.sdkman/etc/config \
     && source "$HOME/.sdkman/bin/sdkman-init.sh" \
     && sdk install java $JAVA_VERSION \
     && sdk offline enable \
