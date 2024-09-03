@@ -13,12 +13,14 @@ ENV LC_ALL=en_US.UTF-8 \
     CMAKE_CXX_COMPILER=/usr/bin/g++
 ENV PATH=$PATH:${LLVM_HOME}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:
 
-RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc${GCC_VERSION} gcc${GCC_VERSION}-c++ gcc${GCC_VERSION}-fortran \
-        ninja git-core wget zip unzip make gawk cmake bison xz python311 python311-pip python311-devel valgrind-devel \
+RUN zypper --non-interactive install -l --no-recommends gcc${GCC_VERSION} gcc${GCC_VERSION}-c++ gcc${GCC_VERSION}-fortran \
+        ninja git-core wget zip unzip make gawk cmake bison xz python312 python312-pip python312-devel valgrind-devel \
     && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-${GCC_VERSION} 10 \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} 10 \
     && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_VERSION} 10 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.12 10 \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 10 \
     && mkdir /opt/llvm && cd /opt/llvm \
     && curl -LO https://github.com/llvm/llvm-project/releases/download/llvmorg-${LLVM_VERSION}/llvm-project-${LLVM_VERSION}.src.tar.xz \
     && tar Jxf llvm-project-${LLVM_VERSION}.src.tar.xz \
