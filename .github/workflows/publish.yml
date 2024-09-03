@@ -1038,7 +1038,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build using podman
         run: |
-          podman pull registry.suse.com/bci/rust:1.79
+          podman pull registry.suse.com/bci/rust:1.80
           podman build -t ghcr.io/appthreat/bci-llvm -f sle/Dockerfile.llvm .
           podman push ghcr.io/appthreat/bci-llvm
 
