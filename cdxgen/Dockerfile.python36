@@ -24,6 +24,7 @@ ENV NVM_DIR="/root/.nvm" \
     FETCH_LICENSE=true \
     CDXGEN_IN_CONTAINER=true \
     SAFE_PIP_INSTALL=true \
+    CRYPTOGRAPHY_DONT_BUILD_RUST=1 \
     PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
 
 RUN source /root/.nvm/nvm.sh \
