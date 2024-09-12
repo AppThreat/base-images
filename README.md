@@ -126,7 +126,7 @@ If you see any mono-related crashes, there isn't a lot that can be done other th
 
 ### View the assemblies in the Global Assembly Cache
 
-Assemblies that are present in the Global Assembly Cache can be referred to and used directly without specifying a version number. This style of includes is common with namespaces such as `System.`, `Microsoft.`, and `Mono.`. Use the command `gacutil -l` to obtain the version details for libraries from GAC.
+Assemblies that are present in the Global Assembly Cache can be referred to and used directly without specifying a version number. This style of includes is common with namespaces such as `System.`, `Microsoft.`, and `Mono.`. Use the command `gacutil -l` to [obtain](https://learn.microsoft.com/en-us/dotnet/framework/app-domains/how-to-view-the-contents-of-the-gac#view-the-assemblies-in-the-gac) the version details for libraries from GAC.
 
 ```shell
 docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -w /app -it ghcr.io/appthreat/bci-dotnet:main gacutil -l
