@@ -162,7 +162,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: sle/Dockerfile.dotnet
+          file: sle/Dockerfile.dotnet6
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta-bci-dotnet.outputs.tags }}
@@ -201,7 +201,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           context: .
-          file: cdxgen/Dockerfile.dotnet
+          file: cdxgen/Dockerfile.dotnet6
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/appthreat/cdxgen-dotnet:v10,ghcr.io/appthreat/cdxgen-dotnet6:v10
@@ -212,7 +212,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           context: .
-          file: cdxgen/Dockerfile.dotnet
+          file: cdxgen/Dockerfile.dotnet6
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta-cdxgen-dotnet.outputs.tags }}
