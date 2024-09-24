@@ -25,6 +25,8 @@ jobs:
               npx @appthreat/caxa --input . --output "cdxgen.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/cdxgen.js"
               .\cdxgen.exe --version
               (Get-FileHash .\cdxgen.exe).hash | Out-File -FilePath .\cdxgen.exe.sha256
+              Remove-Item node_modules -Recurse -Force
+              npm install --omit=optional --omit=dev --no-package-lock --no-audit --no-fund
               npx @appthreat/caxa --input . --output "cdx-verify.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/verify.js"
               .\cdx-verify.exe --version
               (Get-FileHash .\cdx-verify.exe).hash | Out-File -FilePath .\cdx-verify.exe.sha256
@@ -50,8 +52,7 @@ jobs:
       - name: Produce sae
         run: |
           cd cdxgen
-          corepack enable
-          corepack pnpm install --prod --shamefully-hoist --package-import-method copy
+          npm install --omit=dev --no-package-lock --no-audit --no-fund
           ${{ matrix.build }}
       - uses: actions/upload-artifact@v4
         with:
