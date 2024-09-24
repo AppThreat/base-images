@@ -1,0 +1,18 @@
+FROM ghcr.io/appthreat/bci-llvm:main
+
+LABEL maintainer="AppThreat" \
+      org.opencontainers.image.authors="Team AppThreat <cloud@appthreat.com>" \
+      org.opencontainers.image.source="https://github.com/AppThreat/base-images" \
+      org.opencontainers.image.url="https://github.com/AppThreat/base-images" \
+      org.opencontainers.image.version="rolling" \
+      org.opencontainers.image.vendor="AppThreat" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.title="blint" \
+      org.opencontainers.image.description="Rolling image with blint and llvm tools" \
+      org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/blint-llvm:v2 -i /app -o /app/reports"
+
+ENV PATH=${PATH}:/usr/local/bin:/opt/pypi/bin:
+
+RUN pip install --upgrade --no-cache-dir blint --target /opt/pypi
+
+ENTRYPOINT ["blint"]
