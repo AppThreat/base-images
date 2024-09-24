@@ -25,7 +25,7 @@ jobs:
               npx @appthreat/caxa --input . --output "cdxgen.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/cdxgen.js"
               .\cdxgen.exe --version
               (Get-FileHash .\cdxgen.exe).hash | Out-File -FilePath .\cdxgen.exe.sha256
-              corepack pnpm install --package-import-method copy --omit=optional
+              corepack pnpm install --package-import-method copy --no-optional --ignore-scripts
               npx @appthreat/caxa --input . --exclude cdxgen.exe cdxgen.exe.sha256 --output "cdx-verify.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/verify.js"
               .\cdx-verify.exe --version
               (Get-FileHash .\cdx-verify.exe).hash | Out-File -FilePath .\cdx-verify.exe.sha256
@@ -53,11 +53,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
-          path: ${{ matrix.artifact }}
+          path: cdxgen/${{ matrix.artifact }}
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.vartifact }}
-          path: ${{ matrix.vartifact }}
+          path: cdxgen/${{ matrix.vartifact }}
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
