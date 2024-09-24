@@ -22,6 +22,9 @@ jobs:
         include:
           - os: windows-latest
             build: |
+              Remove-Item ci -Recurse -Force
+              Remove-Item contrib -Recurse -Force
+              Remove-Item tools_config -Recurse -Force
               npx @appthreat/caxa --input . --output "cdxgen.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/cdxgen.js"
               .\cdxgen.exe --version
               (Get-FileHash .\cdxgen.exe).hash | Out-File -FilePath .\cdxgen.exe.sha256
