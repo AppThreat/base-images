@@ -22,11 +22,11 @@ jobs:
         include:
           - os: windows-latest
             build: |
-              npx @appthreat/caxa --input cdxgen --output "cdxgen.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/cdxgen.js"
+              npx @appthreat/caxa --input . --output "cdxgen.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/cdxgen.js"
               .\cdxgen.exe --version
               (Get-FileHash .\cdxgen.exe).hash | Out-File -FilePath .\cdxgen.exe.sha256
               corepack pnpm install --package-import-method copy --omit=optional
-              npx @appthreat/caxa --input cdxgen --exclude cdxgen.exe cdxgen.exe.sha256 --output "cdx-verify.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/verify.js"
+              npx @appthreat/caxa --input . --exclude cdxgen.exe cdxgen.exe.sha256 --output "cdx-verify.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/verify.js"
               .\cdx-verify.exe --version
               (Get-FileHash .\cdx-verify.exe).hash | Out-File -FilePath .\cdx-verify.exe.sha256
             artifact: cdxgen.exe
@@ -63,7 +63,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ${{ matrix.artifact }}
-            ${{ matrix.artifact }}.sha256
-            ${{ matrix.vartifact }}
-            ${{ matrix.vartifact }}.sha256
+            cdxgen/${{ matrix.artifact }}
+            cdxgen/${{ matrix.artifact }}.sha256
+            cdxgen/${{ matrix.vartifact }}
+            cdxgen/${{ matrix.vartifact }}.sha256
