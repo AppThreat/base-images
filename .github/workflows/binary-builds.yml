@@ -29,10 +29,12 @@ jobs:
               .\cdx-verify.exe --version
               (Get-FileHash .\cdx-verify.exe).hash | Out-File -FilePath .\cdx-verify.exe.sha256
               .\cdxgen.exe --help
-              .\cdx-verify.exe --help
             artifact: cdxgen.exe
             vartifact: cdx-verify.exe
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
