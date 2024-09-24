@@ -16,7 +16,7 @@ Java 11 version
 docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11-slim:v10 -r /app -o /app/bom.json -t java
 ```
 
-Java 11 version with Android and gcc
+Java 11 version with Android 33 SDK and gcc
 
 ```shell
 docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11:v10 -r /app -o /app/bom.json -t java
@@ -28,7 +28,7 @@ Java 17 version
 docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17-slim:v10 -r /app -o /app/bom.json -t java
 ```
 
-Java 17 version with Androind and gcc
+Java 17 version with Android 34 SDK and gcc
 
 ```shell
 docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17:v10 -r /app -o /app/bom.json -t java
