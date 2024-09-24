@@ -25,7 +25,7 @@ jobs:
               npx @appthreat/caxa --input . --output "cdxgen.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/cdxgen.js"
               .\cdxgen.exe --version
               (Get-FileHash .\cdxgen.exe).hash | Out-File -FilePath .\cdxgen.exe.sha256
-              corepack pnpm install --package-import-method copy --no-optional --ignore-scripts
+              corepack pnpm install --package-import-method copy --prod --no-optional --ignore-scripts
               npx @appthreat/caxa --input . --exclude cdxgen.exe cdxgen.exe.sha256 --output "cdx-verify.exe" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/bin/verify.js"
               .\cdx-verify.exe --version
               (Get-FileHash .\cdx-verify.exe).hash | Out-File -FilePath .\cdx-verify.exe.sha256
