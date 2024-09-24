@@ -6,17 +6,29 @@ This repo contains the base images for AppThreat projects such as cdxgen. They w
 
 ### Legacy Java applications
 
-The official cdxgen image bundles Java >= 21 with the latest maven and gradle. Legacy applications that rely on Java 11 can use the unofficial image `ghcr.io/appthreat/cdxgen-java:v10`. For Java 17, use `ghcr.io/appthreat/cdxgen-java17:v10`.
+The official cdxgen image bundles Java >= 23 with the latest maven and gradle. Legacy applications that rely on Java 11 can use the unofficial image `ghcr.io/appthreat/cdxgen-java11-slim:v10`. For Java 17, use `ghcr.io/appthreat/cdxgen-java17-slim:v10`.
 
 Example invocations:
 
 Java 11 version
 
 ```shell
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11-slim:v10 -r /app -o /app/bom.json -t java
+```
+
+Java 11 version with Android and gcc
+
+```shell
 docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11:v10 -r /app -o /app/bom.json -t java
 ```
 
 Java 17 version
+
+```shell
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17-slim:v10 -r /app -o /app/bom.json -t java
+```
+
+Java 17 version with Androind and gcc
 
 ```shell
 docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17:v10 -r /app -o /app/bom.json -t java
