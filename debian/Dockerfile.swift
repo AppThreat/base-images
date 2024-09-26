@@ -17,7 +17,7 @@ ENV SWIFT_SIGNING_KEY=$SWIFT_SIGNING_KEY \
     SWIFT_VERSION=$SWIFT_VERSION \
     SWIFT_WEBROOT=$SWIFT_WEBROOT \
     PATH=${PATH}:/usr/local/bin:
-    
+
 RUN set -e; \
     ARCH_NAME="$(dpkg --print-architecture)"; \
     url=; \
@@ -59,7 +59,8 @@ RUN set -e; \
     && rm -rf "$GNUPGHOME" swift.tar.gz.sig swift.tar.gz \
     && rm -rf /var/lib/apt/lists/* \
     && swift --version \
-    && swift sdk install ${SWIFT_WEBROOT}/${SWIFT_BRANCH}/static-sdk/${SWIFT_VERSION}/${SWIFT_VERSION}_static-linux-0.0.1.artifactbundle.tar.gz --checksum ${SWIFT_STATIC_SDK_CHECKSUM} \
+    && if [ $ARCH_NAME = "amd64" ]; then swift sdk install ${SWIFT_WEBROOT}/${SWIFT_BRANCH}/static-sdk/${SWIFT_VERSION}/${SWIFT_VERSION}_static-linux-0.0.1.artifactbundle.tar.gz --checksum ${SWIFT_STATIC_SDK_CHECKSUM}; fi \
+    && swift sdk list \
     && mkdir -p /opt/kitten /usr/local/bin \
     && curl -L https://github.com/jpsim/SourceKitten/releases/download/${SOURCEKITTEN_VERSION}/SourceKitten-${SOURCEKITTEN_VERSION}.tar.gz -o /opt/kitten/SourceKitten.tar.gz \
     && cd /opt/kitten/ && tar -xvf SourceKitten.tar.gz \
