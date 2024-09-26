@@ -60,7 +60,6 @@ RUN set -e; \
     && rm -rf /var/lib/apt/lists/* \
     && swift --version \
     && if [ $ARCH_NAME = "amd64" ]; then swift sdk install ${SWIFT_WEBROOT}/${SWIFT_BRANCH}/static-sdk/${SWIFT_VERSION}/${SWIFT_VERSION}_static-linux-0.0.1.artifactbundle.tar.gz --checksum ${SWIFT_STATIC_SDK_CHECKSUM}; fi \
-    && swift sdk list \
     && mkdir -p /opt/kitten /usr/local/bin \
     && curl -L https://github.com/jpsim/SourceKitten/releases/download/${SOURCEKITTEN_VERSION}/SourceKitten-${SOURCEKITTEN_VERSION}.tar.gz -o /opt/kitten/SourceKitten.tar.gz \
     && cd /opt/kitten/ && tar -xvf SourceKitten.tar.gz \
