@@ -5,8 +5,8 @@ FROM debian:12
 # uid           [ unknown] Swift 6.x Release Signing Key <swift-infrastructure@forums.swift.org>
 ARG SWIFT_SIGNING_KEY=52BB7E3DE28A71BE22EC05FFEF80A866B47A981F
 ARG SWIFT_PLATFORM=debian12
-ARG SWIFT_BRANCH=swift-6.0-release
-ARG SWIFT_VERSION=swift-6.0-RELEASE
+ARG SWIFT_BRANCH=swift-6.0.1-release
+ARG SWIFT_VERSION=swift-6.0.1-RELEASE
 ARG SWIFT_WEBROOT=https://download.swift.org
 ARG SWIFT_STATIC_SDK_CHECKSUM=7984c2cf175bde52ba6ea1fcbe27fc4a148a6237c41c719209c9288ed3ceb652
 ARG SOURCEKITTEN_VERSION=0.36.0
@@ -59,7 +59,8 @@ RUN set -e; \
     && rm -rf "$GNUPGHOME" swift.tar.gz.sig swift.tar.gz \
     && rm -rf /var/lib/apt/lists/* \
     && swift --version \
-    && if [ $ARCH_NAME = "amd64" ]; then swift sdk install ${SWIFT_WEBROOT}/${SWIFT_BRANCH}/static-sdk/${SWIFT_VERSION}/${SWIFT_VERSION}_static-linux-0.0.1.artifactbundle.tar.gz --checksum ${SWIFT_STATIC_SDK_CHECKSUM}; fi \
+    && swift sdk install ${SWIFT_WEBROOT}/${SWIFT_BRANCH}/static-sdk/${SWIFT_VERSION}/${SWIFT_VERSION}_static-linux-0.0.1.artifactbundle.tar.gz --checksum ${SWIFT_STATIC_SDK_CHECKSUM} \
+    && swift sdk list \
     && mkdir -p /opt/kitten /usr/local/bin \
     && curl -L https://github.com/jpsim/SourceKitten/releases/download/${SOURCEKITTEN_VERSION}/SourceKitten-${SOURCEKITTEN_VERSION}.tar.gz -o /opt/kitten/SourceKitten.tar.gz \
     && cd /opt/kitten/ && tar -xvf SourceKitten.tar.gz \
