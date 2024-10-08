@@ -12,7 +12,7 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python:v10 -r /app --server"
 
 ARG NODE_VERSION=22.9.0
-ARG CDXGEN_VERSION=10.10.3
+ARG CDXGEN_VERSION=10.10.4
 
 ENV NVM_DIR="/root/.nvm" \
     PYTHON_CMD=python3 \
