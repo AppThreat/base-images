@@ -16,7 +16,7 @@ ARG CDXGEN_VERSION=10.10.4
 ENV CDXGEN_NO_BANNER=true \
     CDXGEN_IN_CONTAINER=true
 
-RUN deno install -g --allow-read --allow-env --allow-run --allow-sys=uid,systemMemoryInfo,gid,homedir --allow-write --allow-net -n cdxgen "npm:@cyclonedx/cdxgen/cdxgen" \
+RUN deno install -g --allow-read --allow-env --allow-run --allow-sys=uid,systemMemoryInfo,gid,homedir --allow-write --allow-net -n cdxgen --node-modules-dir=auto "npm:@cyclonedx/cdxgen@${CDXGEN_VERSION}/cdxgen" \
     && deno install -g --allow-read --allow-env --allow-run --allow-sys=uid,systemMemoryInfo,gid,homedir --allow-write -n atom "npm:@appthreat/atom/atom" \
     && deno install -g --allow-read --allow-env --allow-run --allow-sys=uid,systemMemoryInfo,gid,homedir --allow-write -n astgen "npm:@appthreat/atom/astgen" \
     && ln -s /root/.deno/bin/deno /usr/bin/node \
