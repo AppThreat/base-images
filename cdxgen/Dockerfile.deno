@@ -14,6 +14,8 @@ LABEL maintainer="AppThreat" \
 ARG CDXGEN_VERSION=10.10.4
 
 ENV CDXGEN_NO_BANNER=true \
+    GLOBAL_NODE_MODULES_PATH=/root/.cache/deno/npm/registry.npmjs.org \
+    CDXGEN_PLUGINS_DIR=/root/.cache/deno/npm/registry.npmjs.org/@cyclonedx/cdxgen-plugins-bin/1.6.3/plugins \
     CDXGEN_IN_CONTAINER=true
 
 RUN deno install -g --allow-read --allow-env --allow-run --allow-sys=uid,systemMemoryInfo,gid,homedir --allow-write --allow-net -n cdxgen --node-modules-dir=auto "npm:@cyclonedx/cdxgen@${CDXGEN_VERSION}/cdxgen" \
