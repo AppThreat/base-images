@@ -1,0 +1,25 @@
+FROM opensuse/tumbleweed:latest
+
+ENV LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    PYTHONPATH=/opt/pypi
+
+ENV PATH=${PATH}:/usr/local/bin:/opt/pypi/bin:
+RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
+        bzip2 python313 python313-devel findutils java-23-openjdk-devel \
+        libicu-devel gdal-devel git-core wget zip unzip make gawk nodejs22 npm22 \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
+    && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-14 10 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.13 10 \
+    && curl -LO https://github.com/pypa/pipx/releases/download/1.7.1/pipx.pyz \
+    && python pipx.pyz install --global poetry pipenv --pip-args="--no-cache-dir" && rm pipx.pyz \
+    && node -v \
+    && npm -v \
+    && poetry --version \
+    && pipenv --version \
+    && gcc --version \
+    && zypper clean -a
+
+CMD /bin/bash
