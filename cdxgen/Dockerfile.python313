@@ -25,8 +25,8 @@ ENV NVM_DIR="/root/.nvm" \
     CDXGEN_IN_CONTAINER=true \
     SAFE_PIP_INSTALL=true
 
-RUN zypper --non-interactive install -l --no-recommends clang7 llvm7 llvm7-devel libcurl-devel libjpeg62-devel libmariadb-devel \
-        postgresql-devel postgresql16-server-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel \
+RUN zypper --non-interactive install -l --no-recommends clang18 llvm18 llvm18-devel libcurl-devel libjpeg62-devel libmariadb-devel \
+        postgresql-devel postgresql17-server-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel \
     && npm install -g @cyclonedx/cdxgen@${CDXGEN_VERSION} --omit=dev \
     && zypper clean -a
 
