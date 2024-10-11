@@ -28,8 +28,8 @@ ENV NVM_DIR="/root/.nvm" \
     PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:
 
 RUN source /root/.nvm/nvm.sh \
-    && zypper --non-interactive install -l --no-recommends clang18 llvm18 llvm18-devel libcurl-devel libjpeg62-devel libmariadb-devel \
-        postgresql-devel postgresql17-server-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel \
+    && zypper --non-interactive install -l --no-recommends clang7 llvm7 llvm7-devel libcurl-devel libjpeg62-devel libmariadb-devel \
+        postgresql-devel postgresql16-server-devel libopenssl-devel libopenblas_pthreads-devel lapacke-devel \
     && python3 -m pip install --no-cache-dir --upgrade pip virtualenv \
     && python3 -m pip install --no-cache-dir --upgrade --user pipenv poetry blint \
     && npm install -g @cyclonedx/cdxgen@${CDXGEN_VERSION} --omit=dev \
