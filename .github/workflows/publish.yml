@@ -1623,7 +1623,7 @@ jobs:
         with:
           context: .
           file: opensuse/Dockerfile.python313-nogil
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-opensuse-python313-nogil.outputs.tags }}
           labels: ${{ steps.meta-opensuse-python313-nogil.outputs.labels }}
@@ -1661,7 +1661,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.python313-nogil
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/appthreat/cdxgen-python313-nogil:v10
           labels: ${{ steps.meta-cdxgen-python313-nogil.outputs.labels }}
@@ -1672,7 +1672,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.python313-nogil
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-cdxgen-python313-nogil.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-python313-nogil.outputs.labels }}
