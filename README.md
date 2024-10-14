@@ -132,6 +132,14 @@ Use the unofficial image `ghcr.io/appthreat/cdxgen-deno:v10`.
 docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-deno:v10 -r /app -o /app/bom.json -t js
 ```
 
+### PHP applications
+
+Use the unofficial image `ghcr.io/appthreat/cdxgen-php82:v10`.
+
+```shell
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-php82:v10 -r /app -o /app/bom.json -t php
+```
+
 ## Troubleshooting
 
 ### .Net framework issues

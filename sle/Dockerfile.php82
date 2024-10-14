@@ -1,0 +1,14 @@
+FROM registry.suse.com/bci/php:8
+
+RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends git-core nodejs20 npm20 python312 python312-pip wget zip \
+        unzip make gawk java-21-openjdk-devel php8-devel php8-gd php8-intl php8-pecl php8-pear \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.12 10 \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 10 \
+    && pecl channel-update pecl.php.net \
+    && pecl install timezonedb \
+    && echo 'extension=timezonedb.so' >> /etc/php.ini \
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup.php \
+    && mv composer.phar /usr/local/bin/composer \
+    && zypper clean -a
+
+CMD /bin/bash
