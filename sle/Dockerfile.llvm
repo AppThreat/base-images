@@ -1,7 +1,7 @@
 FROM registry.suse.com/bci/rust:1.81
 
 ARG GCC_VERSION=13
-ARG NODE_VERSION=22.9.0
+ARG NODE_VERSION=23.0.0
 # rustc --version --verbose | grep 'LLVM'
 ARG LLVM_VERSION=18.1.7
 
