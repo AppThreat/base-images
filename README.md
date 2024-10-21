@@ -142,6 +142,24 @@ docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghc
 
 ## Troubleshooting
 
+### npm install issues
+
+Node.js applications that rely on native builds using `node-gyp` might also require specific version of Node.js and Python to build properly. Try using the base image `ghcr.io/appthreat/bci-node20` to test the `npm install` command directly.
+
+```shell
+docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -w /app -it ghcr.io/appthreat/bci-node20:main npm install
+```
+
+Use the `--platform` argument to test the install command under a different architecture such as linux/arm64 or linux/amd64.
+
+```shell
+docker run --platform=linux/arm64 --rm -v /tmp:/tmp -v $(pwd):/app:rw -w /app -it ghcr.io/appthreat/bci-node20:main npm install
+```
+
+```shell
+docker run --platform=linux/amd64 --rm -v /tmp:/tmp -v $(pwd):/app:rw -w /app -it ghcr.io/appthreat/bci-node20:main npm install
+```
+
 ### .Net framework issues
 
 Old .Net framework applications (<= 4.7) are well known for their dislike of linux and hence may not restore/build easily. To troubleshoot, try running the `nuget restore` command manually using the `bci-dotnet` image as shown.
