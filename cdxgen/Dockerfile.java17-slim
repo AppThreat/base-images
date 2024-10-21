@@ -16,6 +16,6 @@ ARG CDXGEN_VERSION=10.10.6
 ENV CDXGEN_NO_BANNER=true \
     CDXGEN_IN_CONTAINER=true
 
-RUN npm install -g @cyclonedx/cdxgen@${CDXGEN_VERSION} --omit=dev
+RUN npm install -g @cyclonedx/cdxgen@${CDXGEN_VERSION} --omit=dev && cdxgen --help
 
 ENTRYPOINT ["cdxgen"]
