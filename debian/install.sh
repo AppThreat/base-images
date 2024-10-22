@@ -11,7 +11,7 @@ mv /root/.sdkman/candidates/* /opt/
 rm -rf /root/.sdkman
 python3 -m pip install --no-cache-dir --upgrade pip virtualenv
 python3 -m pip install --no-cache-dir --upgrade --user pipenv poetry
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 chmod +x /root/.nvm/nvm.sh
 source /root/.nvm/nvm.sh
 nvm install ${NODE_VERSION}
