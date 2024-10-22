@@ -15,7 +15,7 @@ ARG CDXGEN_VERSION=10.10.7
 
 ENV CDXGEN_NO_BANNER=true \
     CDXGEN_IN_CONTAINER=true \
-    NPM_INSTALL_ARGS="--package-lock-only --no-audit --no-fund"
+    NPM_INSTALL_ARGS="--legacy-peer-deps --package-lock-only --no-audit --no-fund"
 
 RUN npm install -g @cyclonedx/cdxgen@${CDXGEN_VERSION} --omit=dev && cdxgen --help
 
