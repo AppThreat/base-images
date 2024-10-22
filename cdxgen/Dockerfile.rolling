@@ -4,7 +4,8 @@ ENV PREFER_MAVEN_DEPS_TREE=true \
     CDXGEN_DEBUG_MODE=debug \
     SCAN_DEBUG_MODE=debug \
     CDXGEN_IN_CONTAINER=true \
-    PYTHONPATH=/opt/pypi
+    PYTHONPATH=/opt/pypi \
+    NPM_INSTALL_ARGS="--package-lock-only --no-audit --no-fund"
 ENV PATH=${PATH}:/usr/local/bin:/opt/pypi/bin:
 
 LABEL maintainer="AppThreat" \
