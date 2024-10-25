@@ -9,7 +9,6 @@ ARG SWIFT_BRANCH=swift-6.0.1-release
 ARG SWIFT_VERSION=swift-6.0.1-RELEASE
 ARG SWIFT_WEBROOT=https://download.swift.org
 ARG SWIFT_STATIC_SDK_CHECKSUM=d4f46ba40e11e697387468e18987ee622908bc350310d8af54eb5e17c2ff5481
-ARG SOURCEKITTEN_VERSION=0.36.0
 
 ENV SWIFT_SIGNING_KEY=$SWIFT_SIGNING_KEY \
     SWIFT_PLATFORM=$SWIFT_PLATFORM \
@@ -60,12 +59,4 @@ RUN set -e; \
     && rm -rf /var/lib/apt/lists/* \
     && swift --version \
     && swift sdk install ${SWIFT_WEBROOT}/${SWIFT_BRANCH}/static-sdk/${SWIFT_VERSION}/${SWIFT_VERSION}_static-linux-0.0.1.artifactbundle.tar.gz --checksum ${SWIFT_STATIC_SDK_CHECKSUM} \
-    && swift sdk list \
-    && mkdir -p /opt/kitten /usr/local/bin \
-    && curl -L https://github.com/jpsim/SourceKitten/releases/download/${SOURCEKITTEN_VERSION}/SourceKitten-${SOURCEKITTEN_VERSION}.tar.gz -o /opt/kitten/SourceKitten.tar.gz \
-    && cd /opt/kitten/ && tar -xvf SourceKitten.tar.gz \
-    && cd /opt/kitten/SourceKitten-${SOURCEKITTEN_VERSION} \
-    && swift build -c release \
-    && cp /opt/kitten/SourceKitten-${SOURCEKITTEN_VERSION}/.build/release/sourcekitten /usr/local/bin/sourcekitten \
-    && cd /root && rm -rf /opt/kitten \
-    && sourcekitten --help
+    && swift sdk list
