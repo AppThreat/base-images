@@ -6,37 +6,37 @@ This repo contains the base images for AppThreat projects such as cdxgen. They w
 
 ### Legacy Java applications
 
-The official cdxgen image bundles Java >= 23 with the latest maven and gradle. Legacy applications that rely on Java 11 can use the unofficial image `ghcr.io/appthreat/cdxgen-java11-slim:v10`. For Java 17, use `ghcr.io/appthreat/cdxgen-java17-slim:v10`.
+The official cdxgen image bundles Java >= 23 with the latest maven and gradle. Legacy applications that rely on Java 11 can use the unofficial image `ghcr.io/appthreat/cdxgen-java11-slim:v11`. For Java 17, use `ghcr.io/appthreat/cdxgen-java17-slim:v11`.
 
 Example invocations:
 
 Java 11 version
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11-slim:v10 -r /app -o /app/bom.json -t java
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11-slim:v11 -r /app -o /app/bom.json -t java
 ```
 
 Java 11 version with Android 33 SDK and gcc
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11:v10 -r /app -o /app/bom.json -t java
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java11:v11 -r /app -o /app/bom.json -t java
 ```
 
 Java 17 version
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17-slim:v10 -r /app -o /app/bom.json -t java
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17-slim:v11 -r /app -o /app/bom.json -t java
 ```
 
 Java 17 version with Android 34 SDK and gcc
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17:v10 -r /app -o /app/bom.json -t java
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $HOME/.m2:$HOME/.m2 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java17:v11 -r /app -o /app/bom.json -t java
 ```
 
 ### .Net Framework, .Net Core 3.1, and .Net 6.0 applications
 
-Use the unofficial image `ghcr.io/appthreat/cdxgen-dotnet:v10`.
+Use the unofficial image `ghcr.io/appthreat/cdxgen-dotnet:v11`.
 
 Example invocation:
 
@@ -45,47 +45,45 @@ Example invocation:
 A bundled version of [nuget](./nuget/) and mono is used to support .Net framework apps.
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet6:v10 -r /app -o /app/bom.json -t dotnet-framework
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet6:v11 -r /app -o /app/bom.json -t dotnet-framework
 ```
 
 Dotnet 3.1 or Dotnet 6.0
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet6:v10 -r /app -o /app/bom.json -t dotnet
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet6:v11 -r /app -o /app/bom.json -t dotnet
 ```
 
 Dotnet 7.0
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet7:v10 -r /app -o /app/bom.json -t dotnet
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet7:v11 -r /app -o /app/bom.json -t dotnet
 ```
 
 Dotnet 8.0
 
-Dotnet 8 is also bundled with the official `ghcr.io/cyclonedx/cdxgen` image.
-
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet8:v10 -r /app -o /app/bom.json -t dotnet
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet8:v11 -r /app -o /app/bom.json -t dotnet
 ```
 
 Dotnet 9.0
 
-Use the `cdxgen-rolling` image for testing dotnet 9 apps.
+Dotnet 9 is also bundled with the official `ghcr.io/cyclonedx/cdxgen` image.
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-rolling:v10 -r /app -o /app/bom.json -t dotnet
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-dotnet9:v11 -r /app -o /app/bom.json -t dotnet
 ```
 
 ### Python applications
 
-Use the unofficial image `ghcr.io/appthreat/cdxgen-python312:v10` or `ghcr.io/appthreat/cdxgen-python311:v10`. This includes additional build tools and libraries to build a range of Python applications. Construction of the dependency tree is supported with Python >= 3.9.
+Use the unofficial image `ghcr.io/appthreat/cdxgen-python312:v11` or `ghcr.io/appthreat/cdxgen-python311:v11`. This includes additional build tools and libraries to build a range of Python applications. Construction of the dependency tree is supported with Python >= 3.9.
 
 Example invocation:
 
 Python 3.6 (Direct dependencies only without dependency tree)
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python36:v10 -r /app -o /app/bom.json -t python
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python36:v11 -r /app -o /app/bom.json -t python
 ```
 
 NOTE: dependency tree is unavailable with Python 3.6
@@ -93,51 +91,51 @@ NOTE: dependency tree is unavailable with Python 3.6
 Python 3.9
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python39:v10 -r /app -o /app/bom.json -t python
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python39:v11 -r /app -o /app/bom.json -t python
 ```
 
 Python 3.10
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python310:v10 -r /app -o /app/bom.json -t python
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python310:v11 -r /app -o /app/bom.json -t python
 ```
 
 Python 3.11
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python311:v10 -r /app -o /app/bom.json -t python
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python311:v11 -r /app -o /app/bom.json -t python
 ```
 
 Python 3.12
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python312:v10 -r /app -o /app/bom.json -t python
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-python312:v11 -r /app -o /app/bom.json -t python
 ```
 
 ### Node.js applications
 
-Use the unofficial image `ghcr.io/appthreat/cdxgen-node20:v10`.
+Use the unofficial image `ghcr.io/appthreat/cdxgen-node20:v11`.
 
 Node.js 20
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-node20:v10 -r /app -o /app/bom.json -t js
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-node20:v11 -r /app -o /app/bom.json -t js
 ```
 
 ### Deno version
 
-Use the unofficial image `ghcr.io/appthreat/cdxgen-deno:v10`.
+Use the unofficial image `ghcr.io/appthreat/cdxgen-deno:v11`.
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-deno:v10 -r /app -o /app/bom.json -t js
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-deno:v11 -r /app -o /app/bom.json -t js
 ```
 
 ### PHP applications
 
-Use the unofficial image `ghcr.io/appthreat/cdxgen-php82:v10`.
+Use the unofficial image `ghcr.io/appthreat/cdxgen-php82:v11`.
 
 ```shell
-docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-php82:v10 -r /app -o /app/bom.json -t php
+docker run --rm -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-php82:v11 -r /app -o /app/bom.json -t php
 ```
 
 ## Troubleshooting
@@ -233,7 +231,7 @@ Include the below argument with the `nerdctl run` command.
 Example:
 
 ```shell
-nerdctl run --rm --platform=linux/arm64 -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-node20:v10 -r /app -o /app/bom.json -t js
+nerdctl run --rm --platform=linux/arm64 -e CDXGEN_DEBUG_MODE=debug -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-node20:v11 -r /app -o /app/bom.json -t js
 ```
 
 ## License

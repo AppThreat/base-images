@@ -1,4 +1,4 @@
-FROM ghcr.io/appthreat/cdxgen-rolling:v10
+FROM ghcr.io/appthreat/cdxgen-rolling:v11
 
 LABEL maintainer="AppThreat" \
       org.opencontainers.image.authors="Team AppThreat <cloud@appthreat.com>" \
