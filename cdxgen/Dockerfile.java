@@ -11,7 +11,7 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.image.description="Rolling image with cdxgen SBOM generator for Java 11 and android apps" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -p 9090:9090 -v $(pwd):/app:rw -t ghcr.io/appthreat/cdxgen-java:v10 -r /app --server"
 
-ARG CDXGEN_VERSION=10.11.0
+ARG CDXGEN_VERSION=11.0.0
 
 ENV CDXGEN_NO_BANNER=true \
     CDXGEN_IN_CONTAINER=true
