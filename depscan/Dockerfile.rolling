@@ -16,7 +16,7 @@ ENV PREFER_MAVEN_DEPS_TREE=true \
     CDXGEN_IN_CONTAINER=true \
     PYTHONPATH=/opt/pypi
 
-RUN python -m pip install --upgrade --no-cache-dir git+https://github.com/owasp-dep-scan/dep-scan@master blint custom-json-diff --target /opt/pypi \
+RUN python -m pip install --upgrade --no-cache-dir git+https://github.com/owasp-dep-scan/dep-scan@master blint custom-json-diff uv --target /opt/pypi \
     && /opt/pypi/bin/depscan --help \
     && /opt/pypi/bin/blint --help
 
