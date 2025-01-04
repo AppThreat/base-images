@@ -1489,6 +1489,7 @@ jobs:
   sle-llvm-image:
     runs-on: [self-hosted, almalinux]
     timeout-minutes: 3600
+    if: false
     permissions:
       contents: read
       packages: write
