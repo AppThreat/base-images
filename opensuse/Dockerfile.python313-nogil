@@ -6,9 +6,9 @@ ENV LC_ALL=en_US.UTF-8 \
     PYTHONPATH=/opt/pypi
 
 ENV PATH=${PATH}:/usr/local/bin:
-RUN zypper refresh && zypper --non-interactive update && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
+RUN zypper refresh && zypper --non-interactive dup && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
         bzip2 python313-nogil python313-nogil-devel findutils java-23-openjdk-devel \
-        libicu-devel gdal-devel libffi-devel libopenssl-devel git-core wget zip unzip make gawk nodejs22 npm22 rust1.81 cargo1.81 \
+        libicu-devel libffi-devel libopenssl-devel git-core wget zip unzip make gawk nodejs22 npm22 rust1.81 cargo1.81 \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
     && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-14 10 \
@@ -18,6 +18,7 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && node -v \
     && npm -v \
     && pipenv --version \
-    && gcc --version
+    && gcc --version \
+    && zypper clean -a
 
 CMD /bin/bash

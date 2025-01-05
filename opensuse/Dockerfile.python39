@@ -21,9 +21,9 @@ RUN set -e; \
             ;; \
         *) echo >&2 "error: unsupported architecture: '$ARCH_NAME'"; exit 1 ;; \
     esac \
-    && zypper --non-interactive install -l --no-recommends gcc12 gcc12-c++ gcc12-fortran \
+    && zypper refresh && zypper --non-interactive dup && zypper --non-interactive install -l --no-recommends gcc12 gcc12-c++ gcc12-fortran \
         python39 python39-devel python39-pip findutils java-23-openjdk-devel \
-        bzip2 git-core wget zip unzip make gawk nodejs22 npm22 nodejs22-devel gdal-devel libxml2-devel \
+        bzip2 git-core wget zip unzip make gawk nodejs22 npm22 nodejs22-devel libxml2-devel \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 10 \
     && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-12 10 \
@@ -40,6 +40,7 @@ RUN set -e; \
     && gcc --version \
     && curl -L --output /usr/bin/bazel https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-${GOBIN_VERSION} \
     && chmod +x /usr/bin/bazel \
-    && bazel --version
+    && bazel --version \
+    && zypper clean -a
 
 CMD /bin/bash
