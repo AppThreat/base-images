@@ -19,7 +19,6 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && npm -v \
     && poetry --version \
     && pipenv --version \
-    && gcc --version \
-    && zypper clean -a
+    && gcc --version
 
 CMD /bin/bash

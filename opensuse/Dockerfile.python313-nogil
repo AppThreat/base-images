@@ -18,7 +18,6 @@ RUN zypper refresh && zypper --non-interactive update && zypper --non-interactiv
     && node -v \
     && npm -v \
     && pipenv --version \
-    && gcc --version \
-    && zypper clean -a
+    && gcc --version
 
 CMD /bin/bash
