@@ -3,7 +3,7 @@ FROM ${SYSBASE} as system-build
 
 RUN mkdir -p /mnt/sys-root; \
     dnf install --installroot /mnt/sys-root glibc-minimal-langpack microdnf \
-    --releasever 9 --setopt install_weak_deps=false --nodocs -y; \
+    --releasever 10 --setopt install_weak_deps=false --nodocs -y; \
     dnf --installroot /mnt/sys-root clean all;
 RUN rm -rf /mnt/sys-root/var/cache/dnf /mnt/sys-root/var/log/dnf* /mnt/sys-root/var/lib/dnf /mnt/sys-root/var/log/yum.*; \
     /bin/date +%Y%m%d_%H%M > /mnt/sys-root/etc/BUILDTIME ;  \
