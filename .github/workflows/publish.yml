@@ -51,7 +51,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: al10/Dockerfile.minimal
+          file: al9/Dockerfile.minimal
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
@@ -88,7 +88,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: al10/Dockerfile.lang
+          file: al9/Dockerfile.lang
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta-lang.outputs.tags }}
