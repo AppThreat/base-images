@@ -1,5 +1,5 @@
 ARG SYSBASE=quay.io/almalinuxorg/almalinux:10-kitten
-FROM ${SYSBASE} as system-build
+FROM ${SYSBASE} AS system-build
 
 RUN mkdir -p /mnt/sys-root; \
     dnf install --installroot /mnt/sys-root glibc-minimal-langpack microdnf \

@@ -1,5 +1,5 @@
 ARG SYSBASE=almalinux:9
-FROM ${SYSBASE} as system-build
+FROM ${SYSBASE} AS system-build
 
 RUN mkdir -p /mnt/sys-root; \
     dnf install --installroot /mnt/sys-root glibc-minimal-langpack microdnf java-21-openjdk-headless findutils which tar gzip zip unzip sudo \

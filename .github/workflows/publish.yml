@@ -21,7 +21,7 @@ env:
 
 jobs:
   base-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -58,7 +58,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   lang-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -95,7 +95,7 @@ jobs:
           labels: ${{ steps.meta-lang.outputs.labels }}
 
   sle-lang-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -132,7 +132,7 @@ jobs:
           labels: ${{ steps.meta-bci-lang.outputs.labels }}
 
   sle-dotnet-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -169,7 +169,7 @@ jobs:
           labels: ${{ steps.meta-bci-dotnet.outputs.labels }}
 
   cdxgen-dotnet-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-dotnet-image
     permissions:
       packages: write
@@ -219,7 +219,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-dotnet.outputs.labels }}
 
   sle-dotnet7-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -256,7 +256,7 @@ jobs:
           labels: ${{ steps.meta-bci-dotnet7.outputs.labels }}
 
   cdxgen-dotnet7-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-dotnet7-image
     permissions:
       packages: write
@@ -305,7 +305,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-dotnet7.outputs.labels }}
 
   sle-dotnet8-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -342,7 +342,7 @@ jobs:
           labels: ${{ steps.meta-bci-dotnet8.outputs.labels }}
 
   cdxgen-dotnet8-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-dotnet8-image
     permissions:
       packages: write
@@ -391,7 +391,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-dotnet8.outputs.labels }}
 
   sle-dotnet9-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -428,7 +428,7 @@ jobs:
           labels: ${{ steps.meta-bci-dotnet9.outputs.labels }}
 
   cdxgen-dotnet9-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-dotnet9-image
     permissions:
       packages: write
@@ -477,7 +477,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-dotnet9.outputs.labels }}
 
   sle-java-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -514,7 +514,7 @@ jobs:
           labels: ${{ steps.meta-bci-java.outputs.labels }}
 
   sle-java-slim-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -551,7 +551,7 @@ jobs:
           labels: ${{ steps.meta-bci-java-slim.outputs.labels }}
 
   cdxgen-java-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-java-image
     permissions:
       packages: write
@@ -601,7 +601,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-java.outputs.labels }}
 
   cdxgen-java-slim-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-java-slim-image
     permissions:
       packages: write
@@ -651,7 +651,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-java-slim.outputs.labels }}
 
   sle-node20-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -688,7 +688,7 @@ jobs:
           labels: ${{ steps.meta-bci-node20.outputs.labels }}
 
   cdxgen-node20-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-node20-image
     permissions:
       packages: write
@@ -738,7 +738,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-node20.outputs.labels }}
 
   sle-java17-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -775,7 +775,7 @@ jobs:
           labels: ${{ steps.meta-bci-java17.outputs.labels }}
 
   sle-java17-slim-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -812,7 +812,7 @@ jobs:
           labels: ${{ steps.meta-bci-java17-slim.outputs.labels }}
 
   cdxgen-java17-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-java17-image
     permissions:
       packages: write
@@ -861,7 +861,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-java17.outputs.labels }}
 
   cdxgen-java17-slim-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-java17-slim-image
     permissions:
       packages: write
@@ -910,7 +910,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-java17-slim.outputs.labels }}
 
   cdxgen-python-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-lang-image
     permissions:
       packages: write
@@ -960,7 +960,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-python.outputs.labels }}
 
   sle-python311-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -997,7 +997,7 @@ jobs:
           labels: ${{ steps.meta-bci-python311.outputs.labels }}
 
   cdxgen-python311-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-python311-image
     permissions:
       packages: write
@@ -1046,7 +1046,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-python311.outputs.labels }}
 
   debian-python311-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1083,7 +1083,7 @@ jobs:
           labels: ${{ steps.meta-debian-python311.outputs.labels }}
 
   debian-swift-image:
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-24.04
       permissions:
         contents: read
         packages: write
@@ -1115,7 +1115,7 @@ jobs:
             labels: ${{ steps.meta-debian-swift.outputs.labels }}
 
   debian-dotnet8-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1152,7 +1152,7 @@ jobs:
           labels: ${{ steps.meta-debian-dotnet8.outputs.labels }}
 
   debian-dotnet9-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1189,7 +1189,7 @@ jobs:
           labels: ${{ steps.meta-debian-dotnet9.outputs.labels }}
 
   sle-python36-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1226,7 +1226,7 @@ jobs:
           labels: ${{ steps.meta-bci-python36.outputs.labels }}
 
   cdxgen-python36-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-python36-image
     permissions:
       packages: write
@@ -1275,7 +1275,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-python36.outputs.labels }}
 
   sle-deno-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1312,7 +1312,7 @@ jobs:
           labels: ${{ steps.meta-bci-deno.outputs.labels }}
 
   cdxgen-deno-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-deno-image
     permissions:
       packages: write
@@ -1361,7 +1361,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-deno.outputs.labels }}
 
   sle-php-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1398,7 +1398,7 @@ jobs:
           labels: ${{ steps.meta-bci-php.outputs.labels }}
 
   cdxgen-php-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: sle-php-image
     permissions:
       packages: write
@@ -1448,7 +1448,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-php.outputs.labels }}
 
   opensuse-lang-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1485,7 +1485,7 @@ jobs:
           labels: ${{ steps.meta-opensuse-lang.outputs.labels }}
 
   cdxgen-rolling-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: opensuse-lang-image
     permissions:
       packages: write
@@ -1523,7 +1523,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-rolling.outputs.labels }}
 
   depscan-rolling-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: cdxgen-rolling-image
     permissions:
       packages: write
@@ -1582,7 +1582,7 @@ jobs:
           podman push ghcr.io/appthreat/bci-llvm
 
   opensuse-python310-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1619,7 +1619,7 @@ jobs:
           labels: ${{ steps.meta-opensuse-python310.outputs.labels }}
 
   cdxgen-python310-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: opensuse-python310-image
     permissions:
       packages: write
@@ -1668,7 +1668,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-python310.outputs.labels }}
 
   opensuse-python39-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1705,7 +1705,7 @@ jobs:
           labels: ${{ steps.meta-opensuse-python39.outputs.labels }}
 
   cdxgen-python39-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: opensuse-python39-image
     permissions:
       packages: write
@@ -1754,7 +1754,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-python39.outputs.labels }}
 
   opensuse-python313-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1791,7 +1791,7 @@ jobs:
           labels: ${{ steps.meta-opensuse-python313.outputs.labels }}
 
   cdxgen-python313-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: opensuse-python313-image
     permissions:
       packages: write
@@ -1840,7 +1840,7 @@ jobs:
           labels: ${{ steps.meta-cdxgen-python313.outputs.labels }}
 
   opensuse-python313-nogil-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -1877,7 +1877,7 @@ jobs:
           labels: ${{ steps.meta-opensuse-python313-nogil.outputs.labels }}
 
   cdxgen-python313-nogil-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: opensuse-python313-nogil-image
     permissions:
       packages: write
