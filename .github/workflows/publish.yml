@@ -163,7 +163,7 @@ jobs:
         with:
           context: .
           file: sle/Dockerfile.dotnet6
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-bci-dotnet.outputs.tags }}
           labels: ${{ steps.meta-bci-dotnet.outputs.labels }}
@@ -202,7 +202,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet6
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/appthreat/cdxgen-dotnet:v11,ghcr.io/appthreat/cdxgen-dotnet6:v11
           labels: ${{ steps.meta-cdxgen-dotnet.outputs.labels }}
@@ -250,7 +250,7 @@ jobs:
         with:
           context: .
           file: sle/Dockerfile.dotnet7
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-bci-dotnet7.outputs.tags }}
           labels: ${{ steps.meta-bci-dotnet7.outputs.labels }}
@@ -299,7 +299,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet7
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-cdxgen-dotnet7.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-dotnet7.outputs.labels }}
@@ -336,7 +336,7 @@ jobs:
         with:
           context: .
           file: sle/Dockerfile.dotnet8
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-bci-dotnet8.outputs.tags }}
           labels: ${{ steps.meta-bci-dotnet8.outputs.labels }}
@@ -374,7 +374,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet8
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/appthreat/cdxgen-dotnet8:v11
           labels: ${{ steps.meta-cdxgen-dotnet8.outputs.labels }}
@@ -385,7 +385,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet8
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-cdxgen-dotnet8.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-dotnet8.outputs.labels }}
@@ -422,7 +422,7 @@ jobs:
         with:
           context: .
           file: sle/Dockerfile.dotnet9
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-bci-dotnet9.outputs.tags }}
           labels: ${{ steps.meta-bci-dotnet9.outputs.labels }}
@@ -460,7 +460,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet9
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/appthreat/cdxgen-dotnet9:v11
           labels: ${{ steps.meta-cdxgen-dotnet9.outputs.labels }}
@@ -471,7 +471,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet9
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta-cdxgen-dotnet9.outputs.tags }}
           labels: ${{ steps.meta-cdxgen-dotnet9.outputs.labels }}
