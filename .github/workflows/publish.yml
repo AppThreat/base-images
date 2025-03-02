@@ -288,7 +288,7 @@ jobs:
         with:
           context: .
           file: cdxgen/Dockerfile.dotnet7
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/appthreat/cdxgen-dotnet7:v11
           labels: ${{ steps.meta-cdxgen-dotnet7.outputs.labels }}
