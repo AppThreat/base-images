@@ -1,7 +1,7 @@
-FROM registry.suse.com/bci/rust:1.82
+FROM registry.suse.com/bci/rust:1.83
 
 ARG GCC_VERSION=13
-ARG NODE_VERSION=23.3.0
+ARG NODE_VERSION=23.9.0
 # rustc --version --verbose | grep 'LLVM'
 ARG LLVM_VERSION=19.1.1
 
@@ -14,7 +14,7 @@ ENV LC_ALL=en_US.UTF-8 \
 ENV PATH=$PATH:${LLVM_HOME}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:
 
 RUN zypper --non-interactive install -l --no-recommends gcc${GCC_VERSION} gcc${GCC_VERSION}-c++ gcc${GCC_VERSION}-fortran \
-        ninja git-core wget zip unzip make gawk cmake bison xz python312 python312-pip python312-devel valgrind-devel \
+        autoconf libtool ninja git-core wget zip unzip make gawk cmake bison xz python312 python312-pip python312-devel valgrind-devel \
     && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-${GCC_VERSION} 10 \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} 10 \
