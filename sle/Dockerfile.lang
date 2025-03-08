@@ -2,6 +2,7 @@ FROM registry.suse.com/bci/python:3.12
 
 ARG JAVA_VERSION=23.0.1-tem
 ARG MAVEN_VERSION=3.9.9
+ARG SCALA_VERSION=3.6.4
 ARG GCC_VERSION=14
 ARG NODE_VERSION=23.9.0
 
@@ -9,11 +10,13 @@ ENV JAVA_VERSION=$JAVA_VERSION \
     MAVEN_VERSION=$MAVEN_VERSION \
     JAVA_HOME="/opt/java/${JAVA_VERSION}" \
     MAVEN_HOME="/opt/maven/${MAVEN_VERSION}" \
+    SCALA_VERSION=$SCALA_VERSION \
+    SCALA_HOME="/opt/scala/${SCALA_VERSION}" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
     NVM_DIR="/root/.nvm"
-ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:/usr/local/bin:
+ENV PATH=${PATH}:/root/.nvm/versions/node/v${NODE_VERSION}/bin:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${SCALA_HOME}/bin:/usr/local/bin:
 RUN set -e; \
     ARCH_NAME="$(rpm --eval '%{_arch}')"; \
     url=; \
@@ -38,6 +41,7 @@ RUN set -e; \
     && source "$HOME/.sdkman/bin/sdkman-init.sh" \
     && sdk install java $JAVA_VERSION \
     && sdk install maven $MAVEN_VERSION \
+    && sdk install scala $SCALA_VERSION \
     && sdk offline enable \
     && mv /root/.sdkman/candidates/* /opt/ \
     && rm -rf /root/.sdkman \
