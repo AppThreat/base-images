@@ -12,13 +12,16 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.docker.cmd="docker run --rm -v /tmp:/tmp -v $(pwd):/app:rw -t ghcr.io/appthreat/depscan-rolling:v5 --src /app --reports-dir /app/reports"
 
 ENV PREFER_MAVEN_DEPS_TREE=true \
-    PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin: \
+    PATH=${PATH}:${MAVEN_HOME}/bin:/usr/local/bin:/opt/pypi/bin:/dep-scan/.venv/bin: \
     CDXGEN_IN_CONTAINER=true \
-    PYTHONPATH=/opt/pypi
+    PYTHONPATH=/dep-scan/.venv:/opt/pypi:${PYTHONPATH}:
 
 RUN python -m pip install --upgrade --no-cache-dir uv --target /opt/pypi \
-    && python -m uv pip install git+https://github.com/owasp-dep-scan/dep-scan@master --all-extras --no-progress \
-    && /opt/pypi/bin/depscan --help \
-    && /opt/pypi/bin/blint --help
+    && git clone https://github.com/owasp-dep-scan/dep-scan.git \
+    && cd dep-scan \
+    && uv venv -p 3.12 \
+    && source /dep-scan/.venv/bin/activate \ 
+    && uv sync --all-extras --all-packages --no-dev --no-cache --no-progress -p 3.12 \
+    && uv run depscan --help
 
-ENTRYPOINT ["/opt/pypi/bin/depscan"]
+ENTRYPOINT ["uv", "run", depscan"]
