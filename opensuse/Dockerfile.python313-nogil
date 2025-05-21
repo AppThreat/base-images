@@ -7,7 +7,7 @@ ENV LC_ALL=en_US.UTF-8 \
 
 ENV PATH=${PATH}:/usr/local/bin:
 RUN zypper refresh && zypper --non-interactive dup && zypper --non-interactive install -l --no-recommends gcc14 gcc14-c++ gcc14-fortran \
-        bzip2 python313-nogil python313-nogil-devel findutils java-23-openjdk-devel \
+        bzip2 python313-nogil python313-nogil-devel findutils java-24-openjdk-devel \
         libicu-devel libffi-devel libopenssl-devel git-core wget zip unzip make gawk nodejs22 npm22 rust1.81 cargo1.81 \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10 \
