@@ -1,8 +1,8 @@
-ARG SYSBASE=quay.io/almalinuxorg/almalinux:10-kitten
+ARG SYSBASE=quay.io/almalinuxautobot/almalinux:10
 FROM ${SYSBASE} AS system-build
 
 RUN mkdir -p /mnt/sys-root; \
-    dnf install --installroot /mnt/sys-root glibc-minimal-langpack microdnf java-21-openjdk-headless findutils which tar gzip zip unzip sudo \
+    dnf install --installroot /mnt/sys-root glibc-minimal-langpack microdnf java-21-openjdk-headless findutils which tar gzip zip unzip sudo nodejs nodejs-devel \
     bzip2 python3 python3-devel python3-pip \
     --releasever 10 --setopt install_weak_deps=false --nodocs -y; \
     dnf --installroot /mnt/sys-root clean all;
@@ -31,7 +31,7 @@ LABEL maintainer="AppThreat" \
       org.opencontainers.image.authors="Team AppThreat <cloud@appthreat.com>" \
       org.opencontainers.image.source="https://github.com/AppThreat/base-images" \
       org.opencontainers.image.url="https://github.com/AppThreat/base-images" \
-      org.opencontainers.image.version="al9" \
+      org.opencontainers.image.version="al10" \
       org.opencontainers.image.vendor="appthreat" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.title="Base image" \
